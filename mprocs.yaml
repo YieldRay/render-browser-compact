@@ -1,0 +1,5 @@
+procs:
+  vite:
+    shell: npx vite
+  bun:
+    shell: bun --watch src/main.tsx
