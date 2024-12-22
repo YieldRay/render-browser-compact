@@ -6,18 +6,19 @@
     "dev": "mprocs",
     "format": "prettier --write ."
   },
-  "dependencies": {
-    "@mdn/browser-compat-data": "^5.6.26",
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "@mdn/browser-compat-data": "^5"
+  },
+  "optionalDependencies": {
     "react-dom": "^19.0.0",
     "satori": "^0.12.0"
   },
   "packageManager": "pnpm@9.15.1",
   "devDependencies": {
-    "@types/bun": "^1.1.14",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
-    "react": "^19.0.0",
     "vite": "^6.0.5"
   }
 }

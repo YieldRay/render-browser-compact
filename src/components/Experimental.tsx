@@ -1,3 +1,4 @@
+import React from "react";
 export function Experimental(props: React.PropsWithoutRef<React.SVGProps<{}>>) {
   return (
     <svg width="16" height="16" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" {...props}>

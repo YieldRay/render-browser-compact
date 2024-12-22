@@ -1,25 +1,25 @@
+import type { CompatData, Identifier, SupportBlock, SupportStatement } from "@mdn/browser-compat-data";
 import bcd from "@mdn/browser-compat-data" with { type: "json" };
-import type { SupportBlock, SupportStatement } from "@mdn/browser-compat-data";
-import { Desktop } from "./components/Desktop";
-import { Mobile } from "./components/Mobile";
-import { Chrome } from "./components/Chrome";
-import { Edge } from "./components/Edge";
-import { Firefox } from "./components/Firefox";
-import { Opera } from "./components/Opera";
-import { Safari } from "./components/Safari";
-import { Samsung } from "./components/Samsung";
-import { Webview } from "./components/Webview";
-import { Yes } from "./components/Yes";
-import { No } from "./components/No";
-import { CSSProperties, PropsWithChildren } from "react";
-import { Deno } from "./components/Deno";
-import { Node } from "./components/Node";
-import { Server } from "./components/Server";
+import React from "react";
+import { Desktop } from "./components/Desktop.tsx";
+import { Mobile } from "./components/Mobile.tsx";
+import { Chrome } from "./components/Chrome.tsx";
+import { Edge } from "./components/Edge.tsx";
+import { Firefox } from "./components/Firefox.tsx";
+import { Opera } from "./components/Opera.tsx";
+import { Safari } from "./components/Safari.tsx";
+import { Samsung } from "./components/Samsung.tsx";
+import { Webview } from "./components/Webview.tsx";
+import { Yes } from "./components/Yes.tsx";
+import { No } from "./components/No.tsx";
+import { Deno } from "./components/Deno.tsx";
+import { Node } from "./components/Node.tsx";
+import { Server } from "./components/Server.tsx";
 
 const cellW = 50;
 const cellWidth = `${cellW}px`;
 
-function Flex({ children, ...style }: PropsWithChildren<CSSProperties>) {
+function Flex({ children, ...style }: React.PropsWithChildren<React.CSSProperties>) {
   return <div style={{ ...style, display: "flex" }}>{children}</div>;
 }
 
@@ -147,19 +147,37 @@ function ServerSupport({ support }: { support: SupportBlock }) {
   );
 }
 
-export function App() {
-  // const compact = bcd.css.properties.display.__compat!
-  const name = "Promise.try";
-  const compact = bcd.api.structuredClone.__compat;
-  console.log(compact);
-  //@ts-ignore
-  const { support, status, tags } = compact!;
+export function RenderBrowserCompat({ paths }: { paths: readonly [keyof Omit<CompatData, "__meta" | "browsers">, ...identifiers: Array<keyof Identifier>] }) {
+  const [keyofCompatData, ...identifiers] = paths;
+  const validKeyofCompatData = new Set(Object.keys(bcd));
+  validKeyofCompatData.delete("__meta");
+  validKeyofCompatData.delete("browsers");
+  if (!validKeyofCompatData.has(keyofCompatData)) {
+    return <span>{`Error: ${keyofCompatData} is not in ${JSON.stringify(validKeyofCompatData)}`}</span>;
+  }
+  const identifier: Identifier = bcd[keyofCompatData];
+  if (identifiers.length === 0) {
+    return <span>{`Error: ${JSON.stringify(identifiers)} is empty`}</span>;
+  }
+
+  let id = identifier;
+  for (const key of identifiers) {
+    if (key === "__compat" || !(key in id)) {
+      return <span>{`Error: ${key} is not in ${JSON.stringify(Object.keys(id))}`}</span>;
+    }
+    id = id[key];
+  }
+
+  const name = paths.at(-1);
+  const compat = id.__compat!;
+
+  const { support, status, tags } = compat;
   const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
 
   const jsx = (
     <Flex flexDirection="column" textAlign="center" fontSize="12px" lineHeight="85%">
       <Flex>
-        <Flex width="100px" border="1px solid #cdcdcd" />
+        <Flex width="100px" border="1px solid #cdcdcd" borderBottom="none" />
         <Flex width="100%">
           <Flex justifyContent="center" width={`${cellW * 5}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
             <Desktop style={{ color: "#696969" }} />

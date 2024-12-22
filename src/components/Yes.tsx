@@ -1,3 +1,4 @@
+import React from "react";
 export function Yes(props: React.PropsWithoutRef<React.SVGProps<{}>>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="10.061" height="7.5908" viewBox="0 0 10.061 7.5908" {...props}>

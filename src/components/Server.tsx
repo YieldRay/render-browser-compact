@@ -1,3 +1,4 @@
+import React from "react";
 export function Server(props: React.PropsWithoutRef<React.SVGProps<{}>>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" {...props}>

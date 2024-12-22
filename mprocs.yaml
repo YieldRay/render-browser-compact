@@ -2,4 +2,6 @@ procs:
   vite:
     shell: npx vite
   bun:
-    shell: bun --watch src/main.tsx
+    shell: bun --watch dev/server.tsx
+  deno:
+    shell: deno run --watch -A dev/server.tsx

@@ -2,4 +2,4 @@
 
 TODO:
 
-- support server: node and deno
+- mobile view support
