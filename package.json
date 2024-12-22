@@ -4,11 +4,12 @@
   "type": "module",
   "scripts": {
     "dev": "mprocs",
+    "build": "esbuild main.tsx --bundle --outdir=dist",
     "format": "prettier --write ."
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "@mdn/browser-compat-data": "^5"
+    "@mdn/browser-compat-data": "^5",
+    "react": "^19.0.0"
   },
   "optionalDependencies": {
     "react-dom": "^19.0.0",
@@ -19,6 +20,7 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
+    "esbuild": "^0.24.2",
     "vite": "^6.0.5"
   }
 }

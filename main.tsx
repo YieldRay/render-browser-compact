@@ -31,7 +31,7 @@ Example:
 ${url.origin}/api.AbortController
 https://bcd.developer.mozilla.org/bcd/api/v0/current/api.AbortController.json
 `,
-      { status: 200 }
+      { status: 200 },
     );
   }
 
