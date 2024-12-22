@@ -12,6 +12,9 @@ import { Webview } from "./components/Webview";
 import { Yes } from "./components/Yes";
 import { No } from "./components/No";
 import { CSSProperties, PropsWithChildren } from "react";
+import { Deno } from "./components/Deno";
+import { Node } from "./components/Node";
+import { Server } from "./components/Server";
 
 const cellW = 50;
 const cellWidth = `${cellW}px`;
@@ -48,11 +51,11 @@ function Support({ support }: { support: SupportStatement | undefined }) {
 
 function DesktopBrowsers() {
   const browsers = {
-    Chrome: Chrome,
-    Edge: Edge,
-    Firefox: Firefox,
-    Opera: Opera,
-    Safari: Safari,
+    Chrome,
+    Edge,
+    Firefox,
+    Opera,
+    Safari,
   } as const;
   return (
     <Flex borderBottom="1px solid #cdcdcd">
@@ -88,12 +91,29 @@ function MobileBrowsers() {
   );
 }
 
+function ServerRuntime() {
+  const runtimes = {
+    Deno,
+    "Node.js": Node,
+  } as const;
+  return (
+    <Flex borderBottom="1px solid #cdcdcd">
+      {Object.entries(runtimes).map(([name, Icon]) => (
+        <Flex key={name} width={cellWidth} borderRight="1px solid #cdcdcd" flexDirection="column" alignItems="center" justifyContent="center" gap="8px">
+          <Icon style={{ color: "#696969" }} />
+          {name}
+        </Flex>
+      ))}
+    </Flex>
+  );
+}
+
 function DesktopSupport({ support }: { support: SupportBlock }) {
   const keys = ["chrome", "edge", "firefox", "opera", "safari"] as const;
   return (
     <Flex borderBottom="1px solid #cdcdcd">
       {keys.map((key) => (
-        <Flex width={cellWidth} borderRight="1px solid #cdcdcd" justifyContent="center">
+        <Flex key={key} width={cellWidth} borderRight="1px solid #cdcdcd" justifyContent="center">
           <Support support={support[key]} />
         </Flex>
       ))}
@@ -106,7 +126,20 @@ function MobileSupport({ support }: { support: SupportBlock }) {
   return (
     <Flex borderBottom="1px solid #cdcdcd">
       {keys.map((key) => (
-        <Flex width={cellWidth} borderRight="1px solid #cdcdcd" justifyContent="center">
+        <Flex key={key} width={cellWidth} borderRight="1px solid #cdcdcd" justifyContent="center">
+          <Support support={support[key]} />
+        </Flex>
+      ))}
+    </Flex>
+  );
+}
+
+function ServerSupport({ support }: { support: SupportBlock }) {
+  const keys = ["deno", "nodejs"] as const;
+  return (
+    <Flex borderBottom="1px solid #cdcdcd">
+      {keys.map((key) => (
+        <Flex key={key} width={cellWidth} borderRight="1px solid #cdcdcd" justifyContent="center">
           <Support support={support[key]} />
         </Flex>
       ))}
@@ -117,10 +150,11 @@ function MobileSupport({ support }: { support: SupportBlock }) {
 export function App() {
   // const compact = bcd.css.properties.display.__compat!
   const name = "Promise.try";
-  const compact = bcd.javascript.builtins.Promise.try.__compat;
+  const compact = bcd.api.structuredClone.__compat;
   console.log(compact);
   //@ts-ignore
   const { support, status, tags } = compact!;
+  const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
 
   const jsx = (
     <Flex flexDirection="column" textAlign="center" fontSize="12px" lineHeight="85%">
@@ -133,6 +167,11 @@ export function App() {
           <Flex justifyContent="center" width={`${cellW * 7}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
             <Mobile style={{ color: "#696969" }} />
           </Flex>
+          {haveServerSupport && (
+            <Flex justifyContent="center" width={`${cellW * 2}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
+              <Server style={{ color: "#696969" }} />
+            </Flex>
+          )}
         </Flex>
       </Flex>
 
@@ -141,6 +180,7 @@ export function App() {
         <Flex width="100%">
           <DesktopBrowsers />
           <MobileBrowsers />
+          {haveServerSupport && <ServerRuntime />}
         </Flex>
       </Flex>
 
@@ -153,15 +193,16 @@ export function App() {
         <Flex width="100%">
           <DesktopSupport support={support} />
           <MobileSupport support={support} />
+          {haveServerSupport && <ServerSupport support={support} />}
         </Flex>
       </Flex>
     </Flex>
   );
 
   return (
-    <Flex flexDirection="column" padding="2px">
+    <Flex flexDirection="column" padding="0px">
       {jsx}
-      <Flex width="705px" alignItems="center" justifyContent="space-between" fontSize="11px">
+      <Flex width="800px" alignItems="center" justifyContent="space-between" fontSize="11px">
         <span>{tags?.join(", ")}</span>
         <span>{JSON.stringify(status)}</span>
       </Flex>

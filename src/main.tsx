@@ -24,7 +24,7 @@ if (typeof Bun !== "undefined")
   Bun.serve({
     async fetch() {
       const svg = await satori(<App />, {
-        width: 720,
+        width: 800,
         height: 600,
         fonts: [
           {
