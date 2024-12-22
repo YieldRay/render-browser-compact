@@ -1,4 +1,5 @@
 import bcd from "@mdn/browser-compat-data" with { type: "json" };
+import type { SupportBlock, SupportStatement } from "@mdn/browser-compat-data";
 import { Desktop } from "./components/Desktop";
 import { Mobile } from "./components/Mobile";
 import { Chrome } from "./components/Chrome";
@@ -19,8 +20,17 @@ function Flex({ children, ...style }: PropsWithChildren<CSSProperties>) {
   return <div style={{ ...style, display: "flex" }}>{children}</div>;
 }
 
-function Support({ support }: { support: any }) {
-  if (support.version_added)
+function Support({ support }: { support: SupportStatement | undefined }) {
+  if (Array.isArray(support)) {
+    const version_added = support[0].version_added;
+    return (
+      <Flex flexDirection="column" alignItems="center" justifyContent="center" gap="6px" padding="8px 0 3px">
+        <Yes style={{ color: "#696969" }} />
+        <span style={{ color: "#007936" }}>{version_added}</span>
+      </Flex>
+    );
+  }
+  if (support?.version_added)
     return (
       <Flex flexDirection="column" alignItems="center" justifyContent="center" gap="6px" padding="8px 0 3px">
         <Yes style={{ color: "#696969" }} />
@@ -37,138 +47,69 @@ function Support({ support }: { support: any }) {
 }
 
 function DesktopBrowsers() {
-  const style: CSSProperties = {
-    width: cellWidth,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-    borderRight: "1px solid #cdcdcd",
-  };
+  const browsers = {
+    Chrome: Chrome,
+    Edge: Edge,
+    Firefox: Firefox,
+    Opera: Opera,
+    Safari: Safari,
+  } as const;
   return (
     <Flex borderBottom="1px solid #cdcdcd">
-      <Flex {...style}>
-        <Chrome style={{ color: "#696969" }} />
-        Chrome
-      </Flex>
-      <Flex {...style}>
-        <Edge style={{ color: "#696969" }} />
-        Edge
-      </Flex>
-      <Flex {...style}>
-        <Firefox style={{ color: "#696969" }} />
-        Firefox
-      </Flex>
-      <Flex {...style}>
-        <Opera style={{ color: "#696969" }} />
-        Opera
-      </Flex>
-      <Flex {...style}>
-        <Safari style={{ color: "#696969" }} />
-        Safari
-      </Flex>
+      {Object.entries(browsers).map(([name, Icon]) => (
+        <Flex key={name} width={cellWidth} borderRight="1px solid #cdcdcd" flexDirection="column" alignItems="center" justifyContent="center" gap="8px">
+          <Icon style={{ color: "#696969" }} />
+          {name}
+        </Flex>
+      ))}
     </Flex>
   );
 }
 
 function MobileBrowsers() {
-  const style: CSSProperties = {
-    width: cellWidth,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRight: "1px solid #cdcdcd",
-  };
+  const browsers = {
+    "Chrome Android": Chrome,
+    "Firefox Android": Firefox,
+    "Opera Android": Opera,
+    "Safari IOS": Safari,
+    "Samsung Internet": Samsung,
+    "Webview Android": Webview,
+    "Webview IOS": Safari,
+  } as const;
   return (
     <Flex borderBottom="1px solid #cdcdcd">
-      <Flex {...style}>
-        <Chrome style={{ color: "#696969" }} />
-        Chrome Android
-      </Flex>
-      <Flex {...style}>
-        <Firefox style={{ color: "#696969" }} />
-        Firefox Android
-      </Flex>
-      <Flex {...style}>
-        <Opera style={{ color: "#696969" }} />
-        Opera Android
-      </Flex>
-      <Flex {...style}>
-        <Safari style={{ color: "#696969" }} />
-        Safari IOS
-      </Flex>
-      <Flex {...style}>
-        <Samsung style={{ color: "#696969" }} />
-        Samsung Internet
-      </Flex>
-      <Flex {...style}>
-        <Webview style={{ color: "#696969" }} />
-        Webview Android
-      </Flex>
-      <Flex {...style}>
-        <Safari style={{ color: "#696969" }} />
-        Webview IOS
-      </Flex>
+      {Object.entries(browsers).map(([name, Icon]) => (
+        <Flex key={name} width={cellWidth} borderRight="1px solid #cdcdcd" flexDirection="column" alignItems="center" justifyContent="center">
+          <Icon style={{ color: "#696969" }} />
+          {name}
+        </Flex>
+      ))}
     </Flex>
   );
 }
 
-function DesktopSupport({ support }: { support: any }) {
-  const style: CSSProperties = {
-    width: cellWidth,
-    borderRight: "1px solid #cdcdcd",
-    justifyContent: "center",
-  };
+function DesktopSupport({ support }: { support: SupportBlock }) {
+  const keys = ["chrome", "edge", "firefox", "opera", "safari"] as const;
   return (
     <Flex borderBottom="1px solid #cdcdcd">
-      <Flex {...style}>
-        <Support support={support.chrome} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.chrome} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.chrome} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.chrome} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.chrome} />
-      </Flex>
+      {keys.map((key) => (
+        <Flex width={cellWidth} borderRight="1px solid #cdcdcd" justifyContent="center">
+          <Support support={support[key]} />
+        </Flex>
+      ))}
     </Flex>
   );
 }
 
-function MobileSupport({ support }: { support: any }) {
-  const style: CSSProperties = {
-    width: cellWidth,
-    borderRight: "1px solid #cdcdcd",
-    justifyContent: "center",
-  };
+function MobileSupport({ support }: { support: SupportBlock }) {
+  const keys = ["chrome_android", "firefox_android", "opera_android", "safari_ios", "samsunginternet_android", "webview_android", "webview_ios"] as const;
   return (
     <Flex borderBottom="1px solid #cdcdcd">
-      <Flex {...style}>
-        <Support support={support.chrome_android} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.firefox_android} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.opera_android} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.safari_ios} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.samsunginternet_android} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.webview_android} />
-      </Flex>
-      <Flex {...style}>
-        <Support support={support.webview_ios} />
-      </Flex>
+      {keys.map((key) => (
+        <Flex width={cellWidth} borderRight="1px solid #cdcdcd" justifyContent="center">
+          <Support support={support[key]} />
+        </Flex>
+      ))}
     </Flex>
   );
 }
@@ -179,7 +120,7 @@ export function App() {
   const compact = bcd.javascript.builtins.Promise.try.__compat;
   console.log(compact);
   //@ts-ignore
-  const { support, status, tags } = compact;
+  const { support, status, tags } = compact!;
 
   const jsx = (
     <Flex flexDirection="column" textAlign="center" fontSize="12px" lineHeight="85%">
