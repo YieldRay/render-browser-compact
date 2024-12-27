@@ -1,6 +1,6 @@
 import React from "react";
 import satori from "satori";
-import { RenderBrowserCompat } from "../src/core.tsx";
+import { RenderBrowserCompat } from "../src/isomorphic.tsx";
 
 async function loadGoogleFont(font: string, text?: string) {
   const url = new URL("https://fonts.googleapis.com/css2");

@@ -1,5 +1,4 @@
-import type { CompatData, Identifier, SupportBlock, SupportStatement, CompatStatement } from "@mdn/browser-compat-data";
-import bcd from "@mdn/browser-compat-data" with { type: "json" };
+import type { SupportBlock, SupportStatement, CompatStatement } from "@mdn/browser-compat-data";
 import React from "react";
 import { Desktop } from "./components/Desktop.tsx";
 import { Mobile } from "./components/Mobile.tsx";
@@ -16,10 +15,10 @@ import { Deno } from "./components/Deno.tsx";
 import { Node } from "./components/Node.tsx";
 import { Server } from "./components/Server.tsx";
 
-const cellW = 50;
-const cellWidth = `${cellW}px`;
+const CELL_WIDTH = 50;
+const CELL_WIDTH_PX = `${CELL_WIDTH}px`;
 
-function Flex({ children, ...style }: React.PropsWithChildren<React.CSSProperties>) {
+export function Flex({ children, ...style }: React.PropsWithChildren<React.CSSProperties>) {
   return <div style={{ ...style, display: "flex" }}>{children}</div>;
 }
 
@@ -61,7 +60,7 @@ function DesktopBrowsers({ childrenProps, ...props }: React.PropsWithChildren<Re
   return (
     <Flex {...props}>
       {Object.entries(browsers).map(([name, Icon]) => (
-        <Flex key={name} width={cellWidth} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
+        <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
           <Icon style={{ color: "#696969" }} />
           {name}
         </Flex>
@@ -83,7 +82,7 @@ function MobileBrowsers({ childrenProps, ...props }: React.PropsWithChildren<Rea
   return (
     <Flex {...props}>
       {Object.entries(browsers).map(([name, Icon]) => (
-        <Flex key={name} width={cellWidth} flexDirection="column" alignItems="center" justifyContent="center" {...childrenProps}>
+        <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" {...childrenProps}>
           <Icon style={{ color: "#696969" }} />
           {name}
         </Flex>
@@ -100,7 +99,7 @@ function ServerRuntimes({ childrenProps, ...props }: React.PropsWithChildren<Rea
   return (
     <Flex {...props}>
       {Object.entries(runtimes).map(([name, Icon]) => (
-        <Flex key={name} width={cellWidth} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
+        <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
           <Icon style={{ color: "#696969" }} />
           {name}
         </Flex>
@@ -114,7 +113,7 @@ function DesktopSupport({ support, childrenProps, ...props }: React.PropsWithChi
   return (
     <Flex {...props}>
       {keys.map((key) => (
-        <Flex key={key} width={cellWidth} justifyContent="center" {...childrenProps}>
+        <Flex key={key} width={CELL_WIDTH_PX} justifyContent="center" {...childrenProps}>
           <Support support={support[key]} />
         </Flex>
       ))}
@@ -127,7 +126,7 @@ function MobileSupport({ support, childrenProps, ...props }: React.PropsWithChil
   return (
     <Flex {...props}>
       {keys.map((key) => (
-        <Flex key={key} width={cellWidth} justifyContent="center" {...childrenProps}>
+        <Flex key={key} width={CELL_WIDTH_PX} justifyContent="center" {...childrenProps}>
           <Support support={support[key]} />
         </Flex>
       ))}
@@ -140,7 +139,7 @@ function ServerSupport({ support, childrenProps, ...props }: React.PropsWithChil
   return (
     <Flex {...props}>
       {keys.map((key) => (
-        <Flex key={key} width={cellWidth} justifyContent="center" {...childrenProps}>
+        <Flex key={key} width={CELL_WIDTH_PX} justifyContent="center" {...childrenProps}>
           <Support support={support[key]} />
         </Flex>
       ))}
@@ -149,21 +148,21 @@ function ServerSupport({ support, childrenProps, ...props }: React.PropsWithChil
 }
 
 function RenderCompatSupportWide({ name, support }: { name: string; support: CompatStatement["support"] }) {
-  const fullWidth = cellW * 14 + 100;
+  const fullWidth = CELL_WIDTH * 14 + 100;
   const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
   return (
     <Flex flexDirection="column" textAlign="center" fontSize="12px" lineHeight="85%" width={`${fullWidth}px`}>
       <Flex>
         <Flex width="100px" border="1px solid #cdcdcd" borderBottom="none" />
         <Flex width="100%">
-          <Flex justifyContent="center" width={`${cellW * 5}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
+          <Flex justifyContent="center" width={`${CELL_WIDTH * 5}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
             <Desktop style={{ color: "#696969" }} />
           </Flex>
-          <Flex justifyContent="center" width={`${cellW * 7}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
+          <Flex justifyContent="center" width={`${CELL_WIDTH * 7}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
             <Mobile style={{ color: "#696969" }} />
           </Flex>
           {haveServerSupport && (
-            <Flex justifyContent="center" width={`${cellW * 2}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
+            <Flex justifyContent="center" width={`${CELL_WIDTH * 2}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
               <Server style={{ color: "#696969" }} />
             </Flex>
           )}
@@ -196,11 +195,11 @@ function RenderCompatSupportWide({ name, support }: { name: string; support: Com
 }
 
 function RenderCompatSupportCompact({ name, support }: { name: string; support: CompatStatement["support"] }) {
-  const fullWidth = cellW * 6;
+  const fullWidth = CELL_WIDTH * 6;
   const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
   const threeCols = (
     <Flex>
-      <Flex flexDirection="column" width={`${cellW * 2}px`}>
+      <Flex flexDirection="column" width={`${CELL_WIDTH * 2}px`}>
         <Flex height="20px" justifyContent="center" alignItems="center" border="1px solid #cdcdcd">
           <Desktop style={{ color: "#696969" }} />
         </Flex>
@@ -210,7 +209,7 @@ function RenderCompatSupportCompact({ name, support }: { name: string; support: 
         </Flex>
       </Flex>
 
-      <Flex flexDirection="column" width={`${cellW * 2}px`}>
+      <Flex flexDirection="column" width={`${CELL_WIDTH * 2}px`}>
         <Flex height="20px" justifyContent="center" alignItems="center" border="1px solid #cdcdcd">
           <Mobile style={{ color: "#696969" }} />
         </Flex>
@@ -221,7 +220,7 @@ function RenderCompatSupportCompact({ name, support }: { name: string; support: 
       </Flex>
 
       {haveServerSupport && (
-        <Flex flexDirection="column" width={`${cellW * 2}px`}>
+        <Flex flexDirection="column" width={`${CELL_WIDTH * 2}px`}>
           <Flex height="20px" justifyContent="center" alignItems="center" border="1px solid #cdcdcd">
             <Server style={{ color: "#696969" }} />
           </Flex>
@@ -243,44 +242,7 @@ function RenderCompatSupportCompact({ name, support }: { name: string; support: 
   );
 }
 
-function RenderCompatSupport({ compact, ...props }: { name: string; support: CompatStatement["support"]; compact?: boolean }) {
+export function RenderCompatSupport({ compact, ...props }: { name: string; support: CompatStatement["support"]; compact?: boolean }) {
   if (compact) return <RenderCompatSupportCompact {...props} />;
   else return <RenderCompatSupportWide {...props} />;
-}
-
-export function RenderBrowserCompat({ paths }: { paths: readonly [keyof Omit<CompatData, "__meta" | "browsers">, ...identifiers: Array<keyof Identifier>] }) {
-  const [keyofCompatData, ...identifiers] = paths;
-  const validKeyofCompatData = new Set(Object.keys(bcd));
-  validKeyofCompatData.delete("__meta");
-  validKeyofCompatData.delete("browsers");
-  if (!validKeyofCompatData.has(keyofCompatData)) {
-    return <span>{`Error: ${keyofCompatData} is not in ${JSON.stringify(validKeyofCompatData)}`}</span>;
-  }
-  const identifier: Identifier = bcd[keyofCompatData];
-  if (identifiers.length === 0) {
-    return <span>{`Error: ${JSON.stringify(identifiers)} is empty`}</span>;
-  }
-
-  let id = identifier;
-  for (const key of identifiers) {
-    if (key === "__compat" || !(key in id)) {
-      return <span>{`Error: ${key} is not in ${JSON.stringify(Object.keys(id))}`}</span>;
-    }
-    id = id[key];
-  }
-
-  const name = String(paths.at(-1)!);
-  const compat = id.__compat!;
-
-  const { support, status, tags } = compat;
-
-  return (
-    <Flex flexDirection="column" padding="0px">
-      <RenderCompatSupport name={name} support={support} />
-      <Flex width="800px" alignItems="center" justifyContent="space-between" fontSize="11px">
-        <span>{tags?.join(", ")}</span>
-        <span>{JSON.stringify(status)}</span>
-      </Flex>
-    </Flex>
-  );
 }
