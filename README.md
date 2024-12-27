@@ -7,5 +7,5 @@ TODO:
 - [ ] auto width/height for svg
 - [ ] add a docs site, and can select compat data by ui
 - [ ] support theming (dark mode)
-- [ ]- data fetching mode
+- [ ] data fetching mode
 - [ ] support web-component/react

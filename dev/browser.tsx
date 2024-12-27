@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { RenderBrowserCompat } from "../src/core.tsx";
+import { RenderBrowserCompat } from "../src/isomorphic.tsx";
 
 const paths = ["api", "structuredClone"] as const;
 
