@@ -3,6 +3,9 @@ import bcd from "@mdn/browser-compat-data" with { type: "json" };
 import React from "react";
 import { Flex, RenderCompatSupport } from "./core.tsx";
 
+/**
+ * isomorphic, can be used in both browser and server. however, as it loads all compat data, it is not recommended to use in the browser considering the bundle size.
+ */
 export function RenderBrowserCompat({ paths }: { paths: readonly [keyof Omit<CompatData, "__meta" | "browsers">, ...identifiers: Array<keyof Identifier>] }) {
   const [keyofCompatData, ...identifiers] = paths;
   const validKeyofCompatData = new Set(Object.keys(bcd));
