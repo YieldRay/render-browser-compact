@@ -7,6 +7,6 @@ const paths = ["api", "structuredClone"] as const;
 const root = createRoot(document.getElementById("app")!);
 root.render(
   <React.StrictMode>
-    <RenderBrowserCompat paths={paths} />
+    <RenderBrowserCompat paths={paths} compact />
   </React.StrictMode>,
 );
