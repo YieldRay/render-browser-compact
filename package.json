@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "mprocs",
-    "build": "esbuild main.tsx --bundle --outdir=dist",
+    "build": "vite build",
     "format": "prettier --write ."
   },
   "peerDependencies": {

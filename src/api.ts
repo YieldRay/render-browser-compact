@@ -1,6 +1,5 @@
-import type { CompatData, Identifier } from "@mdn/browser-compat-data";
-
-export type Paths = readonly [keyof Omit<CompatData, "__meta" | "browsers">, ...identifiers: Array<keyof Identifier>];
+import type { Identifier } from "@mdn/browser-compat-data";
+import { Paths } from "./core.tsx";
 
 export async function fetchBcdApi(paths: Paths) {
   const resp: {

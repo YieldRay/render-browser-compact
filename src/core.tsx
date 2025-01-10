@@ -1,4 +1,4 @@
-import type { SupportBlock, SupportStatement, CompatStatement } from "@mdn/browser-compat-data";
+import type { SupportBlock, SupportStatement, CompatStatement, CompatData, Identifier } from "@mdn/browser-compat-data";
 import React from "react";
 import { Desktop } from "./components/Desktop.tsx";
 import { Mobile } from "./components/Mobile.tsx";
@@ -248,3 +248,5 @@ export function RenderCompatSupport({ compact, ...props }: { name: string; suppo
   // compact: 260px
   else return <RenderCompatSupportWide {...props} />;
 }
+
+export type Paths = readonly [keyof Omit<CompatData, "__meta" | "browsers">, ...identifiers: Array<keyof Identifier>];

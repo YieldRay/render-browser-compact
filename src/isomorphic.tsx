@@ -1,8 +1,7 @@
 import type { Identifier, CompatStatement } from "@mdn/browser-compat-data";
 import bcd from "@mdn/browser-compat-data" with { type: "json" };
 import React from "react";
-import { Flex, RenderCompatSupport } from "./core.tsx";
-import type { Paths } from "./api.ts";
+import { Flex, RenderCompatSupport, type Paths } from "./core.tsx";
 
 /**
  * isomorphic, can be used in both browser and server.
