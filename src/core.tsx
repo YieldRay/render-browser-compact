@@ -244,7 +244,7 @@ function RenderCompatSupportCompact({ name, support }: { name: string; support: 
 
 export function RenderCompatSupport({ compact, ...props }: { name: string; support: CompatStatement["support"]; compact?: boolean }) {
   if (compact) return <RenderCompatSupportCompact {...props} />;
-  // wide: 800px 
+  // wide: 800px
   // compact: 260px
   else return <RenderCompatSupportWide {...props} />;
 }
