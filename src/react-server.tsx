@@ -1,6 +1,7 @@
 "use server";
 import React from "react";
-import { fetchBcdApi, type Paths } from "./api.ts";
+import type { Paths } from "./core.tsx";
+import { fetchBcdApi } from "./api.ts";
 import { RenderBrowserCompatData } from "./isomorphic.tsx";
 
 export async function RenderBrowserCompat({ paths, compact }: { paths: Paths; compact?: boolean }) {
