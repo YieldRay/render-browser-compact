@@ -3,7 +3,7 @@ import satori from "satori";
 import type { Paths } from "./core.tsx";
 import { RenderBrowserCompat } from "./isomorphic.tsx";
 
-// TODO: use a binary
+// TODO: use a binary font
 async function loadGoogleFont(font: string, text?: string) {
   const url = new URL("https://fonts.googleapis.com/css2");
   url.searchParams.set("family", font);
@@ -22,6 +22,9 @@ async function loadGoogleFont(font: string, text?: string) {
 }
 
 /**
+ * When we need to render SVG, this normally only happens on the
+ * server side, so in this version we import the whole bcd data
+ *
  * { headers: { "content-type": "image/svg+xml" } }
  */
 export async function renderSVG(paths: Paths, compact?: boolean) {
