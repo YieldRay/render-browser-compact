@@ -8,6 +8,8 @@ import { RenderBrowserCompatData } from "./isomorphic.tsx";
  * when we need to render html, we expect it happens on the
  * client side (prefer svg on the server), so we load bcd
  * data from online api
+ *
+ * CSS: * { box-sizing: border-box; overflow: hidden; }
  */
 export async function renderHTML(paths: Paths, compact?: boolean) {
   const $compat = await fetchBcdApi(paths);
@@ -22,6 +24,5 @@ export async function renderHTML(paths: Paths, compact?: boolean) {
    */
   const html = renderToStaticMarkup(element);
   return html;
+  // TODO: we should add style to each element, then no extra styling is needed
 }
-
- 

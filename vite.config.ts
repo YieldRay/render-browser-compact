@@ -9,6 +9,11 @@ const __dirname = dirname(__filename);
 // https://cn.vite.dev/guide/build#library-mode
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   build: {
     lib: {
       entry: {
