@@ -15,7 +15,7 @@ export class BrowserCompat extends HTMLElement {
     if (!paths) return;
     const compact = this.hasAttribute("compact");
     const html = await renderHTML(paths.split(".") as any, compact);
-    this.shadowRoot!.innerHTML = html;
+    this.shadowRoot!.innerHTML = `<style>* { box-sizing: border-box; overflow: hidden; }</style>` + html;
   }
 
   connectedCallback() {

@@ -49,7 +49,6 @@ function Support({ support }: { support: SupportStatement | undefined }) {
 }
 
 function DesktopBrowsers({ childrenProps, ...props }: React.PropsWithChildren<React.CSSProperties & { childrenProps?: React.CSSProperties }>) {
-  console.log(childrenProps);
   const browsers = {
     Chrome,
     Edge,
