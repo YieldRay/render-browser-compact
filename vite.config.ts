@@ -2,13 +2,14 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // https://cn.vite.dev/guide/build#library-mode
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), dts({ tsconfigPath: "./tsconfig.app.json" })],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -20,14 +21,15 @@ export default defineConfig({
         isomorphic: resolve(__dirname, "src/isomorphic.tsx"),
         "react-dom": resolve(__dirname, "src/react-dom.tsx"),
         "react-server": resolve(__dirname, "src/react-server.tsx"),
-        "web-component": resolve(__dirname, "src/web-component.tsx"),
+        "web-component": resolve(__dirname, "src/web-component.ts"),
         svg: resolve(__dirname, "src/svg.tsx"),
         html: resolve(__dirname, "src/html.tsx"),
       },
       name: "RenderBrowserCompat",
+      formats: ["es"],
     },
     rollupOptions: {
-      external: ["@mdn/browser-compat-data", "react", "react-dom", "satori"],
+      external: ["@mdn/browser-compat-data", "react", "react-dom", "react-dom/client", "react-dom/server", "react/jsx-runtime", "satori"],
       output: {
         globals: {
           react: "React",
