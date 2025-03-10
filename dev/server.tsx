@@ -7,6 +7,7 @@ const handler = async () => {
 };
 
 declare global {
+  const Deno: any;
   const Bun: any;
 }
 
@@ -15,4 +16,6 @@ if (typeof Deno !== "undefined") {
 } else if (typeof Bun !== "undefined") {
   console.log(`Listening on http://localhost:3000/`);
   Bun.serve({ fetch: handler });
+} else {
+  // this is a .tsx file, so nodejs does not support it for now
 }
