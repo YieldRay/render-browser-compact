@@ -3,18 +3,14 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // https://cn.vite.dev/guide/build#library-mode
 export default defineConfig({
-  plugins: [react(), dts({ tsconfigPath: "./tsconfig.app.json" })],
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-    },
-  },
+  plugins: [react(), tsconfigPaths(), dts({ tsconfigPath: "./tsconfig.app.json" })],
   build: {
     lib: {
       entry: {
