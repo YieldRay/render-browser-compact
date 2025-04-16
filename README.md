@@ -1,6 +1,15 @@
 # render-browser-compact
 
-TODO:
+Goal of this project is to render MDN [Browser Compatibility Data](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Page_structures/Compatibility_tables) to
+
+- SVG
+- HTML
+- Web Component
+- React Component
+
+with a style similar to the MDN docs page.
+
+## TODO
 
 - [x] mobile view support
 - [ ] support showing sub compat data
