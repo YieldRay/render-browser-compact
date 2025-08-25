@@ -4,4 +4,6 @@ procs:
   bun:
     shell: bun --watch dev/server.tsx
   deno:
-    shell: deno run --watch -A dev/server.tsx
+    shell: deno --watch -A dev/server.tsx
+  node:
+    shell: tsx --watch dev/server.tsx

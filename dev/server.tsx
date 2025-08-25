@@ -1,4 +1,5 @@
 import { renderSVG } from "../src/svg.tsx";
+import { serve } from "@hono/node-server";
 
 const handler = async () => {
   const paths = ["api", "structuredClone"] as const;
@@ -18,4 +19,6 @@ if (typeof Deno !== "undefined") {
   Bun.serve({ fetch: handler });
 } else {
   // this is a .tsx file, so nodejs does not support it for now
+  console.log(`Listening on http://localhost:3001/`);
+  serve({ fetch: handler, port: 3001 });
 }

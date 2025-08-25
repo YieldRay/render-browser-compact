@@ -10,21 +10,23 @@
   },
   "peerDependencies": {
     "@mdn/browser-compat-data": "^5",
-    "react": "^19.0.0"
+    "react": "^19.1.1"
   },
   "optionalDependencies": {
-    "react-dom": "^19.1.0",
-    "satori": "^0.12.2"
+    "react-dom": "^19.1.1",
+    "satori": "^0.16.2"
   },
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@10.15.0",
   "devDependencies": {
-    "@types/node": "^22.14.1",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.4.0",
-    "prettier": "^3.5.3",
-    "vite": "^6.3.0",
-    "vite-plugin-dts": "^4.5.3",
+    "@hono/node-server": "^1.19.0",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.1",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.5",
+    "vite": "^7.1.3",
+    "vite-plugin-dts": "^4.5.4",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
