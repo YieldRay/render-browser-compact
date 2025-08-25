@@ -1,5 +1,5 @@
 import type { Identifier, CompatStatement } from "@mdn/browser-compat-data";
-import bcd from "@mdn/browser-compat-data" with { type: "json" };
+import bcd from "@mdn/browser-compat-data";
 import React from "react";
 import { Flex, RenderCompatSupport, type Paths } from "./core.tsx";
 
