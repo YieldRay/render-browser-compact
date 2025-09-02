@@ -13,8 +13,8 @@ with a style similar to the MDN docs page.
 
 - [x] mobile view support
 - [ ] support showing sub compat data
-- [x] auto width/height for svg
 - [ ] add a docs site, and can select compat data by ui
+- [x] auto width/height for svg
 - [x] support theming (dark mode)
 - [x] data fetching mode
 - [x] support react
@@ -24,29 +24,19 @@ with a style similar to the MDN docs page.
 
 This library supports light and dark themes through a prop-based theme system that works across all rendering targets (SVG, HTML, React components, Web components) without requiring hooks or context, making it fully SSR compatible.
 
-### Theme Interface
-
 ```typescript
 interface Theme {
-  iconColor: string;        // Color for browser icons and generic icons
-  supportYesColor: string;  // Color for "Yes" support indicators  
-  supportNoColor: string;   // Color for "No" support indicators
-  textColor: string;        // Primary text color
-  borderColor: string;      // Border color for table elements
-  backgroundColor: string;  // Background color
+  iconColor: string; // Color for browser icons and generic icons
+  supportYesColor: string; // Color for "Yes" support indicators
+  supportNoColor: string; // Color for "No" support indicators
+  textColor: string; // Primary text color
+  borderColor: string; // Border color for table elements
+  backgroundColor: string; // Background color
 }
 ```
 
-### Built-in Themes
-
 ```typescript
-import { lightTheme, darkTheme } from 'render-browser-compat/theme';
-
-// Light theme (default)
-const light = lightTheme;
-
-// Dark theme  
-const dark = darkTheme;
+import { lightTheme, darkTheme } from "render-browser-compat/theme";
 ```
 
 ### Usage Examples
@@ -77,19 +67,19 @@ import { darkTheme } from 'render-browser-compat/theme';
 #### SVG Rendering
 
 ```typescript
-import { renderSVG } from 'render-browser-compat/svg';
-import { darkTheme } from 'render-browser-compat/theme';
+import { renderSVG } from "render-browser-compat/svg";
+import { darkTheme } from "render-browser-compat/theme";
 
-const svg = await renderSVG(['api', 'fetch'], false, darkTheme);
+const svg = await renderSVG(["api", "fetch"], false, darkTheme);
 ```
 
 #### HTML Rendering
 
 ```typescript
-import { renderHTML } from 'render-browser-compat/html';
-import { darkTheme } from 'render-browser-compat/theme';
+import { renderHTML } from "render-browser-compat/html";
+import { lightTheme } from "render-browser-compat/theme";
 
-const html = await renderHTML(['api', 'fetch'], false, darkTheme);
+const html = await renderHTML(["api", "fetch"], false, lightTheme);
 ```
 
 #### Custom Themes
@@ -97,7 +87,7 @@ const html = await renderHTML(['api', 'fetch'], false, darkTheme);
 ```typescript
 const customTheme = {
   iconColor: "#8b5cf6",
-  supportYesColor: "#10b981", 
+  supportYesColor: "#10b981",
   supportNoColor: "#ef4444",
   textColor: "#1f2937",
   borderColor: "#d1d5db",

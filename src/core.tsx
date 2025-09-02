@@ -152,7 +152,7 @@ function RenderCompatSupportWide({ name, support, theme = defaultTheme }: { name
   const fullWidth = CELL_WIDTH * 14 + 100;
   const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
   return (
-    <Flex flexDirection="column" textAlign="center" fontSize="12px" lineHeight="85%" width={`${fullWidth}px`}>
+    <Flex flexDirection="column" textAlign="center" fontSize="12px" lineHeight="85%" width={`${fullWidth}px`} background={theme.backgroundColor} color={theme.textColor}>
       <Flex>
         <Flex width="100px" border={`1px solid ${theme.borderColor}`} borderBottom="none" />
         <Flex width="100%">
@@ -199,7 +199,7 @@ function RenderCompatSupportCompact({ name, support, theme = defaultTheme }: { n
   const fullWidth = CELL_WIDTH * 6;
   const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
   const threeCols = (
-    <Flex>
+    <Flex background={theme.backgroundColor} color={theme.textColor}>
       <Flex flexDirection="column" width={`${CELL_WIDTH * 2}px`}>
         <Flex height="20px" justifyContent="center" alignItems="center" border={`1px solid ${theme.borderColor}`}>
           <Desktop style={{ color: theme.iconColor }} />
