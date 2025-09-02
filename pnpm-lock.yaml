@@ -16,20 +16,20 @@ importers:
         version: 19.1.1
     devDependencies:
       '@hono/node-server':
-        specifier: ^1.19.0
-        version: 1.19.0(hono@4.9.4)
+        specifier: ^1.19.1
+        version: 1.19.1(hono@4.9.4)
       '@types/node':
         specifier: ^22.18.0
         version: 22.18.0
       '@types/react':
-        specifier: ^19.1.11
-        version: 19.1.11
+        specifier: ^19.1.12
+        version: 19.1.12
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.11)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.12)
       '@vitejs/plugin-react':
-        specifier: ^5.0.1
-        version: 5.0.1(vite@7.1.3(@types/node@22.18.0)(tsx@4.20.5))
+        specifier: ^5.0.2
+        version: 5.0.2(vite@7.1.4(@types/node@22.18.0)(tsx@4.20.5))
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -37,14 +37,14 @@ importers:
         specifier: ^4.20.5
         version: 4.20.5
       vite:
-        specifier: ^7.1.3
-        version: 7.1.3(@types/node@22.18.0)(tsx@4.20.5)
+        specifier: ^7.1.4
+        version: 7.1.4(@types/node@22.18.0)(tsx@4.20.5)
       vite-plugin-dts:
         specifier: ^4.5.4
-        version: 4.5.4(@types/node@22.18.0)(rollup@4.48.1)(typescript@5.7.3)(vite@7.1.3(@types/node@22.18.0)(tsx@4.20.5))
+        version: 4.5.4(@types/node@22.18.0)(rollup@4.48.1)(typescript@5.7.3)(vite@7.1.4(@types/node@22.18.0)(tsx@4.20.5))
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.7.3)(vite@7.1.3(@types/node@22.18.0)(tsx@4.20.5))
+        version: 5.1.4(typescript@5.7.3)(vite@7.1.4(@types/node@22.18.0)(tsx@4.20.5))
     optionalDependencies:
       react-dom:
         specifier: ^19.1.1
@@ -309,8 +309,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@hono/node-server@1.19.0':
-    resolution: {integrity: sha512-1k8/8OHf5VIymJEcJyVksFpT+AQ5euY0VA5hUkCnlKpD4mr8FSbvXaHblxeTTEr90OaqWzAkQaqD80qHZQKxBA==}
+  '@hono/node-server@1.19.1':
+    resolution: {integrity: sha512-h44e5s+ByUriaRIbeS/C74O8v90m0A95luyYQGMF7KEn96KkYMXO7bZAwombzTpjQTU4e0TkU8U1WBIXlwuwtA==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -318,23 +318,12 @@ packages:
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
 
-  '@jridgewell/gen-mapping@0.3.8':
-    resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
-    engines: {node: '>=6.0.0'}
-
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
     engines: {node: '>=6.0.0'}
 
-  '@jridgewell/set-array@1.2.1':
-    resolution: {integrity: sha512-R8gLRTZeyp03ymzP/6Lil/28tGeGEzhx1q2k703KGWRAI1VdvPIXdG70VJc2pAMw3NA6JKL5hhFu1sJX0Mnn/A==}
-    engines: {node: '>=6.0.0'}
-
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
-
-  '@jridgewell/trace-mapping@0.3.25':
-    resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
@@ -355,8 +344,8 @@ packages:
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
 
-  '@rolldown/pluginutils@1.0.0-beta.32':
-    resolution: {integrity: sha512-QReCdvxiUZAPkvp1xpAg62IeNzykOFA6syH2CnClif4YmALN1XKpB39XneL80008UbtMShthSVDKmrx05N1q/g==}
+  '@rolldown/pluginutils@1.0.0-beta.34':
+    resolution: {integrity: sha512-LyAREkZHP5pMom7c24meKmJCdhf2hEyvam2q0unr3or9ydwDL+DJ8chTF6Av/RFPb3rH8UFBdMzO5MxTZW97oA==}
 
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
@@ -529,16 +518,16 @@ packages:
   '@types/node@22.18.0':
     resolution: {integrity: sha512-m5ObIqwsUp6BZzyiy4RdZpzWGub9bqLJMvZDD0QMXhxjqMHMENlj+SqF5QxoUwaQNFe+8kz8XM8ZQhqkQPTgMQ==}
 
-  '@types/react-dom@19.1.7':
-    resolution: {integrity: sha512-i5ZzwYpqjmrKenzkoLM2Ibzt6mAsM7pxB6BCIouEVVmgiqaMj1TjaK7hnA36hbW5aZv20kx7Lw6hWzPWg0Rurw==}
+  '@types/react-dom@19.1.9':
+    resolution: {integrity: sha512-qXRuZaOsAdXKFyOhRBg6Lqqc0yay13vN7KrIg4L7N4aaHN68ma9OK3NE1BoDFgFOTfM7zg+3/8+2n8rLUH3OKQ==}
     peerDependencies:
       '@types/react': ^19.0.0
 
-  '@types/react@19.1.11':
-    resolution: {integrity: sha512-lr3jdBw/BGj49Eps7EvqlUaoeA0xpj3pc0RoJkHpYaCHkVK7i28dKyImLQb3JVlqs3aYSXf7qYuWOW/fgZnTXQ==}
+  '@types/react@19.1.12':
+    resolution: {integrity: sha512-cMoR+FoAf/Jyq6+Df2/Z41jISvGZZ2eTlnsaJRptmZ76Caldwy1odD4xTr/gNV9VLj0AWgg/nmkevIyUfIIq5w==}
 
-  '@vitejs/plugin-react@5.0.1':
-    resolution: {integrity: sha512-DE4UNaBXwtVoDJ0ccBdLVjFTWL70NRuWNCxEieTI3lrq9ORB9aOCQEKstwDXBl87NvFdbqh/p7eINGyj0BthJA==}
+  '@vitejs/plugin-react@5.0.2':
+    resolution: {integrity: sha512-tmyFgixPZCx2+e6VO9TNITWcCQl8+Nl/E8YbAyPVv85QCc7/A3JrdfG2A8gIzvVhWuzMOVrFW1aReaNxrI6tbw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
@@ -1038,8 +1027,8 @@ packages:
       vite:
         optional: true
 
-  vite@7.1.3:
-    resolution: {integrity: sha512-OOUi5zjkDxYrKhTV3V7iKsoS37VUM7v40+HuwEmcrsf11Cdx9y3DIr2Px6liIcZFwt3XSRpQvFpL3WVy7ApkGw==}
+  vite@7.1.4:
+    resolution: {integrity: sha512-X5QFK4SGynAeeIt+A7ZWnApdUyHYm+pzv/8/A57LqSGcI88U6R6ipOs3uCesdc6yl7nl+zNO0t8LmqAdXcQihw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1094,8 +1083,8 @@ snapshots:
 
   '@ampproject/remapping@2.3.0':
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.8
-      '@jridgewell/trace-mapping': 0.3.25
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.30
 
   '@babel/code-frame@7.27.1':
     dependencies:
@@ -1297,7 +1286,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.1':
     optional: true
 
-  '@hono/node-server@1.19.0(hono@4.9.4)':
+  '@hono/node-server@1.19.1(hono@4.9.4)':
     dependencies:
       hono: 4.9.4
 
@@ -1306,22 +1295,9 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
       '@jridgewell/trace-mapping': 0.3.30
 
-  '@jridgewell/gen-mapping@0.3.8':
-    dependencies:
-      '@jridgewell/set-array': 1.2.1
-      '@jridgewell/sourcemap-codec': 1.5.0
-      '@jridgewell/trace-mapping': 0.3.25
-
   '@jridgewell/resolve-uri@3.1.2': {}
 
-  '@jridgewell/set-array@1.2.1': {}
-
   '@jridgewell/sourcemap-codec@1.5.0': {}
-
-  '@jridgewell/trace-mapping@0.3.25':
-    dependencies:
-      '@jridgewell/resolve-uri': 3.1.2
-      '@jridgewell/sourcemap-codec': 1.5.0
 
   '@jridgewell/trace-mapping@0.3.30':
     dependencies:
@@ -1365,7 +1341,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@rolldown/pluginutils@1.0.0-beta.32': {}
+  '@rolldown/pluginutils@1.0.0-beta.34': {}
 
   '@rollup/pluginutils@5.1.4(rollup@4.48.1)':
     dependencies:
@@ -1479,24 +1455,24 @@ snapshots:
 
   '@types/babel__core@7.20.5':
     dependencies:
-      '@babel/parser': 7.27.0
-      '@babel/types': 7.27.0
+      '@babel/parser': 7.28.3
+      '@babel/types': 7.28.2
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.6
 
   '@types/babel__generator@7.6.8':
     dependencies:
-      '@babel/types': 7.27.0
+      '@babel/types': 7.28.2
 
   '@types/babel__template@7.4.4':
     dependencies:
-      '@babel/parser': 7.27.0
-      '@babel/types': 7.27.0
+      '@babel/parser': 7.28.3
+      '@babel/types': 7.28.2
 
   '@types/babel__traverse@7.20.6':
     dependencies:
-      '@babel/types': 7.27.0
+      '@babel/types': 7.28.2
 
   '@types/estree@1.0.7': {}
 
@@ -1506,23 +1482,23 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/react-dom@19.1.7(@types/react@19.1.11)':
+  '@types/react-dom@19.1.9(@types/react@19.1.12)':
     dependencies:
-      '@types/react': 19.1.11
+      '@types/react': 19.1.12
 
-  '@types/react@19.1.11':
+  '@types/react@19.1.12':
     dependencies:
       csstype: 3.1.3
 
-  '@vitejs/plugin-react@5.0.1(vite@7.1.3(@types/node@22.18.0)(tsx@4.20.5))':
+  '@vitejs/plugin-react@5.0.2(vite@7.1.4(@types/node@22.18.0)(tsx@4.20.5))':
     dependencies:
       '@babel/core': 7.28.3
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.3)
       '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.3)
-      '@rolldown/pluginutils': 1.0.0-beta.32
+      '@rolldown/pluginutils': 1.0.0-beta.34
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 7.1.3(@types/node@22.18.0)(tsx@4.20.5)
+      vite: 7.1.4(@types/node@22.18.0)(tsx@4.20.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -2007,7 +1983,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite-plugin-dts@4.5.4(@types/node@22.18.0)(rollup@4.48.1)(typescript@5.7.3)(vite@7.1.3(@types/node@22.18.0)(tsx@4.20.5)):
+  vite-plugin-dts@4.5.4(@types/node@22.18.0)(rollup@4.48.1)(typescript@5.7.3)(vite@7.1.4(@types/node@22.18.0)(tsx@4.20.5)):
     dependencies:
       '@microsoft/api-extractor': 7.51.1(@types/node@22.18.0)
       '@rollup/pluginutils': 5.1.4(rollup@4.48.1)
@@ -2020,24 +1996,24 @@ snapshots:
       magic-string: 0.30.17
       typescript: 5.7.3
     optionalDependencies:
-      vite: 7.1.3(@types/node@22.18.0)(tsx@4.20.5)
+      vite: 7.1.4(@types/node@22.18.0)(tsx@4.20.5)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite-tsconfig-paths@5.1.4(typescript@5.7.3)(vite@7.1.3(@types/node@22.18.0)(tsx@4.20.5)):
+  vite-tsconfig-paths@5.1.4(typescript@5.7.3)(vite@7.1.4(@types/node@22.18.0)(tsx@4.20.5)):
     dependencies:
       debug: 4.4.0
       globrex: 0.1.2
       tsconfck: 3.1.5(typescript@5.7.3)
     optionalDependencies:
-      vite: 7.1.3(@types/node@22.18.0)(tsx@4.20.5)
+      vite: 7.1.4(@types/node@22.18.0)(tsx@4.20.5)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@7.1.3(@types/node@22.18.0)(tsx@4.20.5):
+  vite@7.1.4(@types/node@22.18.0)(tsx@4.20.5):
     dependencies:
       esbuild: 0.25.1
       fdir: 6.5.0(picomatch@4.0.3)

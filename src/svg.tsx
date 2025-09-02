@@ -2,6 +2,8 @@ import React from "react";
 import satori from "satori";
 import type { Paths } from "./core.tsx";
 import { RenderBrowserCompat } from "./isomorphic.tsx";
+import type { Theme } from "./theme.ts";
+import { defaultTheme } from "./theme.ts";
 
 // TODO: use a binary font
 async function loadGoogleFont(font: string, text?: string) {
@@ -27,8 +29,8 @@ async function loadGoogleFont(font: string, text?: string) {
  *
  * { headers: { "content-type": "image/svg+xml" } }
  */
-export async function renderSVG(paths: Paths, compact?: boolean) {
-  return satori(<RenderBrowserCompat paths={paths} compact={compact} />, {
+export async function renderSVG(paths: Paths, compact?: boolean, theme: Theme = defaultTheme) {
+  return satori(<RenderBrowserCompat paths={paths} compact={compact} theme={theme} />, {
     width: compact ? 260 : 800,
     height: compact ? 800 : 150,
     fonts: [

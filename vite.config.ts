@@ -20,6 +20,7 @@ export default defineConfig({
         "web-component": resolve(__dirname, "src/web-component.ts"),
         svg: resolve(__dirname, "src/svg.tsx"),
         html: resolve(__dirname, "src/html.tsx"),
+        theme: resolve(__dirname, "src/theme.ts"),
       },
       name: "RenderBrowserCompat",
       formats: ["es"],

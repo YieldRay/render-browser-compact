@@ -1,8 +1,13 @@
 import { renderSVG } from "../src/svg.tsx";
+import { lightTheme, darkTheme } from "../src/theme.ts";
 
-const handler = async () => {
+const handler = async (request: Request) => {
+  const url = new URL(request.url);
   const paths = ["api", "structuredClone"] as const;
-  const svg = await renderSVG(paths);
+  const theme = url.searchParams.get("theme") === "dark" ? darkTheme : lightTheme;
+  const compact = url.searchParams.has("compact");
+  
+  const svg = await renderSVG(paths, compact, theme);
   return new Response(svg, { headers: { "content-type": "image/svg+xml" } });
 };
 

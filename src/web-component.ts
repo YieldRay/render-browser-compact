@@ -1,4 +1,6 @@
 import { renderHTML } from "./html.tsx";
+import type { Theme } from "./theme.ts";
+import { defaultTheme, darkTheme } from "./theme.ts";
 
 export class BrowserCompat extends HTMLElement {
   constructor() {
@@ -10,16 +12,23 @@ export class BrowserCompat extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["paths", "compact"];
+    return ["paths", "compact", "theme"];
   }
 
   private async _rerender() {
     const paths = this.getAttribute("paths");
     if (!paths) return;
     const compact = this.hasAttribute("compact");
+    const themeAttr = this.getAttribute("theme");
+    let theme: Theme = defaultTheme;
+    if (themeAttr === "dark") {
+      theme = darkTheme;
+    } else if (themeAttr === "light") {
+      theme = defaultTheme;
+    }
     try {
       this.setAttribute("state", "loading");
-      const html = await renderHTML(paths.split(".") as any, compact);
+      const html = await renderHTML(paths.split(".") as any, compact, theme);
       this.shadowRoot!.innerHTML = html;
       this.setAttribute("state", "ok");
     } catch {
