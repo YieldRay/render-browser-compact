@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Fix Verification</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background: #f0f0f0;
+        }
+        .demo-section { 
+            margin: 20px 0; 
+            padding: 20px; 
+            border: 2px solid #333; 
+            border-radius: 8px;
+        }
+        .dark-demo { 
+            background-color: #0a0a0a; 
+            color: white;
+        }
+        .light-demo { 
+            background-color: #ffffff; 
+            color: black;
+        }
+        h2 { margin-top: 0; }
+    </style>
+</head>
+<body>
+    <h1>🌓 Dark Mode Theme Fix Verification</h1>
+    
+    <div class="demo-section light-demo">
+        <h2>Light Theme</h2>
+        <p>Expected: Dark text on light background with traditional colors</p>
+        <div id="light-react"></div>
+        <h3>Web Component:</h3>
+        <browser-compat paths="api.structuredClone" theme="light"></browser-compat>
+    </div>
+    
+    <div class="demo-section dark-demo">
+        <h2>Dark Theme</h2>
+        <p>Expected: Light text on dark background with high contrast colors</p>
+        <div id="dark-react"></div>
+        <h3>Web Component:</h3>
+        <browser-compat paths="api.structuredClone" theme="dark"></browser-compat>
+    </div>
+
+    <div class="demo-section">
+        <h2>Color Values Test</h2>
+        <div id="color-test"></div>
+    </div>
+
+    <script type="module">
+        // Import the built modules
+        import { init } from './dist/web-component.js';
+        import { lightTheme, darkTheme } from './dist/theme.js';
+        
+        // Initialize web components
+        await init();
+        
+        // Show theme colors
+        const colorTestDiv = document.getElementById('color-test');
+        colorTestDiv.innerHTML = `
+            <h3>Light Theme Colors:</h3>
+            <ul>
+                <li>Text: ${lightTheme.textColor}</li>
+                <li>Background: ${lightTheme.backgroundColor}</li>
+                <li>Border: ${lightTheme.borderColor}</li>
+                <li>Support Yes: ${lightTheme.supportYesColor}</li>
+                <li>Support No: ${lightTheme.supportNoColor}</li>
+                <li>Icon: ${lightTheme.iconColor}</li>
+            </ul>
+            
+            <h3>Dark Theme Colors:</h3>
+            <ul>
+                <li>Text: ${darkTheme.textColor}</li>
+                <li>Background: ${darkTheme.backgroundColor}</li>
+                <li>Border: ${darkTheme.borderColor}</li>
+                <li>Support Yes: ${darkTheme.supportYesColor}</li>
+                <li>Support No: ${darkTheme.supportNoColor}</li>
+                <li>Icon: ${darkTheme.iconColor}</li>
+            </ul>
+        `;
+        
+        console.log('✅ Theme test page loaded successfully');
+        console.log('✅ Web components initialized');
+        console.log('Light theme:', lightTheme);
+        console.log('Dark theme:', darkTheme);
+    </script>
+</body>
+</html>

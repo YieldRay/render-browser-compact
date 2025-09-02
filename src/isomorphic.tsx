@@ -41,11 +41,11 @@ export function RenderBrowserCompat({ paths, compact, theme = defaultTheme }: { 
  */
 export function RenderBrowserCompatData({ name, support, tags, status, compact, theme = defaultTheme }: { name: string; support: CompatStatement["support"]; tags: CompatStatement["tags"]; status: CompatStatement["status"]; compact?: boolean; theme?: Theme }) {
   return (
-    <Flex flexDirection="column" padding="0px">
+    <Flex flexDirection="column" padding="0px" backgroundColor={theme.backgroundColor}>
       <RenderCompatSupport name={name} support={support} compact={compact} theme={theme} />
       <Flex width={compact ? "320px" : "800px"} flexDirection={compact ? "column" : "row"} alignItems={compact ? "flex-start" : "center"} justifyContent="space-between" fontSize="11px" wordBreak="break-all">
-        <span style={{ lineHeight: "85%" }}>{tags?.join(", ")}</span>
-        <span style={{ lineHeight: "85%" }}>{JSON.stringify(status)}</span>
+        <span style={{ lineHeight: "85%", color: theme.textColor }}>{tags?.join(", ")}</span>
+        <span style={{ lineHeight: "85%", color: theme.textColor }}>{JSON.stringify(status)}</span>
       </Flex>
     </Flex>
   );

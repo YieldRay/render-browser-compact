@@ -63,7 +63,7 @@ function DesktopBrowsers({ childrenProps, theme = defaultTheme, ...props }: Reac
       {Object.entries(browsers).map(([name, Icon]) => (
         <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
           <Icon style={{ color: theme.iconColor }} />
-          {name}
+          <span style={{ color: theme.textColor }}>{name}</span>
         </Flex>
       ))}
     </Flex>
@@ -85,7 +85,7 @@ function MobileBrowsers({ childrenProps, theme = defaultTheme, ...props }: React
       {Object.entries(browsers).map(([name, Icon]) => (
         <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" {...childrenProps}>
           <Icon style={{ color: theme.iconColor }} />
-          {name}
+          <span style={{ color: theme.textColor }}>{name}</span>
         </Flex>
       ))}
     </Flex>
@@ -102,7 +102,7 @@ function ServerRuntimes({ childrenProps, theme = defaultTheme, ...props }: React
       {Object.entries(runtimes).map(([name, Icon]) => (
         <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
           <Icon style={{ color: theme.iconColor }} />
-          {name}
+          <span style={{ color: theme.textColor }}>{name}</span>
         </Flex>
       ))}
     </Flex>
@@ -181,7 +181,7 @@ function RenderCompatSupportWide({ name, support, theme = defaultTheme }: { name
 
       <Flex>
         <Flex width="100px" border={`1px solid ${theme.borderColor}`} borderTop="none">
-          <Flex width="100px" alignItems="center" justifyContent="center" wordBreak="break-word" padding="0 2px">
+          <Flex width="100px" alignItems="center" justifyContent="center" wordBreak="break-word" padding="0 2px" color={theme.textColor}>
             {name}
           </Flex>
         </Flex>
@@ -235,7 +235,7 @@ function RenderCompatSupportCompact({ name, support, theme = defaultTheme }: { n
   );
   return (
     <Flex width={`${fullWidth}px`} textAlign="center" fontSize="12px" lineHeight="85%" flexDirection="column">
-      <Flex justifyContent="center" padding="4px">
+      <Flex justifyContent="center" padding="4px" color={theme.textColor}>
         {name}
       </Flex>
       {threeCols}
