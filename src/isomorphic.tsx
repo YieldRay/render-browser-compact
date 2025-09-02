@@ -1,13 +1,14 @@
 import type { Identifier, CompatStatement } from "@mdn/browser-compat-data";
 import bcd from "@mdn/browser-compat-data";
-import React from "react";
 import { Flex, RenderCompatSupport, type Paths } from "./core.tsx";
+import type { Theme } from "./theme.ts";
+import { defaultTheme } from "./theme.ts";
 
 /**
  * isomorphic, can be used in both browser and server.
  * however, as it loads all compat data, it is not recommended to use in the browser considering the bundle size.
  */
-export function RenderBrowserCompat({ paths, compact }: { paths: Paths; compact?: boolean }) {
+export function RenderBrowserCompat({ paths, compact, theme = defaultTheme }: { paths: Paths; compact?: boolean; theme?: Theme }) {
   const [keyofCompatData, ...identifiers] = paths;
   const validKeyofCompatData = new Set(Object.keys(bcd));
   validKeyofCompatData.delete("__meta");
@@ -32,16 +33,16 @@ export function RenderBrowserCompat({ paths, compact }: { paths: Paths; compact?
   const compat = id.__compat!;
 
   const { support, status, tags } = compat;
-  return <RenderBrowserCompatData {...{ name, support, tags, status, compact }} />;
+  return <RenderBrowserCompatData {...{ name, support, tags, status, compact, theme }} />;
 }
 
 /**
  * @internal
  */
-export function RenderBrowserCompatData({ name, support, tags, status, compact }: { name: string; support: CompatStatement["support"]; tags: CompatStatement["tags"]; status: CompatStatement["status"]; compact?: boolean }) {
+export function RenderBrowserCompatData({ name, support, tags, status, compact, theme = defaultTheme }: { name: string; support: CompatStatement["support"]; tags: CompatStatement["tags"]; status: CompatStatement["status"]; compact?: boolean; theme?: Theme }) {
   return (
     <Flex flexDirection="column" padding="0px">
-      <RenderCompatSupport name={name} support={support} compact={compact} />
+      <RenderCompatSupport name={name} support={support} compact={compact} theme={theme} />
       <Flex width={compact ? "320px" : "800px"} flexDirection={compact ? "column" : "row"} alignItems={compact ? "flex-start" : "center"} justifyContent="space-between" fontSize="11px" wordBreak="break-all">
         <span style={{ lineHeight: "85%" }}>{tags?.join(", ")}</span>
         <span style={{ lineHeight: "85%" }}>{JSON.stringify(status)}</span>
