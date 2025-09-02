@@ -2,6 +2,7 @@ import type { Identifier, CompatStatement } from "@mdn/browser-compat-data";
 import bcd from "@mdn/browser-compat-data";
 import React from "react";
 import { Flex, RenderCompatSupport, type Paths } from "./core.tsx";
+import { useThemeColors } from "./theme.tsx";
 
 /**
  * isomorphic, can be used in both browser and server.
@@ -39,10 +40,12 @@ export function RenderBrowserCompat({ paths, compact }: { paths: Paths; compact?
  * @internal
  */
 export function RenderBrowserCompatData({ name, support, tags, status, compact }: { name: string; support: CompatStatement["support"]; tags: CompatStatement["tags"]; status: CompatStatement["status"]; compact?: boolean }) {
+  const colors = useThemeColors();
+  
   return (
     <Flex flexDirection="column" padding="0px">
       <RenderCompatSupport name={name} support={support} compact={compact} />
-      <Flex width={compact ? "320px" : "800px"} flexDirection={compact ? "column" : "row"} alignItems={compact ? "flex-start" : "center"} justifyContent="space-between" fontSize="11px" wordBreak="break-all">
+      <Flex width={compact ? "320px" : "800px"} flexDirection={compact ? "column" : "row"} alignItems={compact ? "flex-start" : "center"} justifyContent="space-between" fontSize="11px" wordBreak="break-all" color={colors.textSecondary}>
         <span style={{ lineHeight: "85%" }}>{tags?.join(", ")}</span>
         <span style={{ lineHeight: "85%" }}>{JSON.stringify(status)}</span>
       </Flex>

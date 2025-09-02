@@ -14,6 +14,7 @@ import { No } from "./components/No.tsx";
 import { Deno } from "./components/Deno.tsx";
 import { Node } from "./components/Node.tsx";
 import { Server } from "./components/Server.tsx";
+import { useThemeColors } from "./theme.tsx";
 
 const CELL_WIDTH = 50;
 const CELL_WIDTH_PX = `${CELL_WIDTH}px`;
@@ -23,32 +24,35 @@ export function Flex({ children, ...style }: React.PropsWithChildren<React.CSSPr
 }
 
 function Support({ support }: { support: SupportStatement | undefined }) {
+  const colors = useThemeColors();
+  
   if (Array.isArray(support)) {
     const version_added = support[0].version_added;
     return (
       <Flex flexDirection="column" alignItems="center" justifyContent="center" gap="6px" padding="8px 0 3px">
-        <Yes style={{ color: "#696969" }} />
-        <span style={{ color: "#007936" }}>{version_added}</span>
+        <Yes style={{ color: colors.iconColor }} />
+        <span style={{ color: colors.success }}>{version_added}</span>
       </Flex>
     );
   }
   if (support?.version_added)
     return (
       <Flex flexDirection="column" alignItems="center" justifyContent="center" gap="6px" padding="8px 0 3px">
-        <Yes style={{ color: "#696969" }} />
-        <span style={{ color: "#007936" }}>{support.version_added}</span>
+        <Yes style={{ color: colors.iconColor }} />
+        <span style={{ color: colors.success }}>{support.version_added}</span>
       </Flex>
     );
 
   return (
     <Flex flexDirection="column" alignItems="center" justifyContent="center" gap="6px" padding="8px 0 3px">
-      <No style={{ color: "#d30038" }} />
-      <span style={{ color: "#d30038" }}>No</span>
+      <No style={{ color: colors.error }} />
+      <span style={{ color: colors.error }}>No</span>
     </Flex>
   );
 }
 
 function DesktopBrowsers({ childrenProps, ...props }: React.PropsWithChildren<React.CSSProperties & { childrenProps?: React.CSSProperties }>) {
+  const colors = useThemeColors();
   const browsers = {
     Chrome,
     Edge,
@@ -60,7 +64,7 @@ function DesktopBrowsers({ childrenProps, ...props }: React.PropsWithChildren<Re
     <Flex {...props}>
       {Object.entries(browsers).map(([name, Icon]) => (
         <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
-          <Icon style={{ color: "#696969" }} />
+          <Icon style={{ color: colors.iconColor }} />
           {name}
         </Flex>
       ))}
@@ -69,6 +73,7 @@ function DesktopBrowsers({ childrenProps, ...props }: React.PropsWithChildren<Re
 }
 
 function MobileBrowsers({ childrenProps, ...props }: React.PropsWithChildren<React.CSSProperties & { childrenProps?: React.CSSProperties }>) {
+  const colors = useThemeColors();
   const browsers = {
     "Chrome Android": Chrome,
     "Firefox Android": Firefox,
@@ -82,7 +87,7 @@ function MobileBrowsers({ childrenProps, ...props }: React.PropsWithChildren<Rea
     <Flex {...props}>
       {Object.entries(browsers).map(([name, Icon]) => (
         <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" {...childrenProps}>
-          <Icon style={{ color: "#696969" }} />
+          <Icon style={{ color: colors.iconColor }} />
           {name}
         </Flex>
       ))}
@@ -91,6 +96,7 @@ function MobileBrowsers({ childrenProps, ...props }: React.PropsWithChildren<Rea
 }
 
 function ServerRuntimes({ childrenProps, ...props }: React.PropsWithChildren<React.CSSProperties & { childrenProps?: React.CSSProperties }>) {
+  const colors = useThemeColors();
   const runtimes = {
     Deno,
     "Node.js": Node,
@@ -99,7 +105,7 @@ function ServerRuntimes({ childrenProps, ...props }: React.PropsWithChildren<Rea
     <Flex {...props}>
       {Object.entries(runtimes).map(([name, Icon]) => (
         <Flex key={name} width={CELL_WIDTH_PX} flexDirection="column" alignItems="center" justifyContent="center" gap="8px" {...childrenProps}>
-          <Icon style={{ color: "#696969" }} />
+          <Icon style={{ color: colors.iconColor }} />
           {name}
         </Flex>
       ))}
@@ -147,46 +153,47 @@ function ServerSupport({ support, childrenProps, ...props }: React.PropsWithChil
 }
 
 function RenderCompatSupportWide({ name, support }: { name: string; support: CompatStatement["support"] }) {
+  const colors = useThemeColors();
   const fullWidth = CELL_WIDTH * 14 + 100;
   const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
   return (
     <Flex flexDirection="column" textAlign="center" fontSize="12px" lineHeight="85%" width={`${fullWidth}px`}>
       <Flex>
-        <Flex width="100px" border="1px solid #cdcdcd" borderBottom="none" />
+        <Flex width="100px" border={`1px solid ${colors.border}`} borderBottom="none" />
         <Flex width="100%">
-          <Flex justifyContent="center" width={`${CELL_WIDTH * 5}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
-            <Desktop style={{ color: "#696969" }} />
+          <Flex justifyContent="center" width={`${CELL_WIDTH * 5}px`} padding="4px" borderBottom={`1px solid ${colors.border}`} borderRight={`1px solid ${colors.border}`} borderTop={`1px solid ${colors.border}`}>
+            <Desktop style={{ color: colors.iconColor }} />
           </Flex>
-          <Flex justifyContent="center" width={`${CELL_WIDTH * 7}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
-            <Mobile style={{ color: "#696969" }} />
+          <Flex justifyContent="center" width={`${CELL_WIDTH * 7}px`} padding="4px" borderBottom={`1px solid ${colors.border}`} borderRight={`1px solid ${colors.border}`} borderTop={`1px solid ${colors.border}`}>
+            <Mobile style={{ color: colors.iconColor }} />
           </Flex>
           {haveServerSupport && (
-            <Flex justifyContent="center" width={`${CELL_WIDTH * 2}px`} padding="4px" borderBottom="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" borderTop="1px solid #cdcdcd">
-              <Server style={{ color: "#696969" }} />
+            <Flex justifyContent="center" width={`${CELL_WIDTH * 2}px`} padding="4px" borderBottom={`1px solid ${colors.border}`} borderRight={`1px solid ${colors.border}`} borderTop={`1px solid ${colors.border}`}>
+              <Server style={{ color: colors.iconColor }} />
             </Flex>
           )}
         </Flex>
       </Flex>
 
-      <Flex color="#1b1b1b">
-        <Flex width="100px" border="1px solid #cdcdcd" borderTop="none" />
+      <Flex color={colors.text}>
+        <Flex width="100px" border={`1px solid ${colors.border}`} borderTop="none" />
         <Flex width="100%">
-          <DesktopBrowsers borderBottom="1px solid #cdcdcd" childrenProps={{ borderRight: "1px solid #cdcdcd" }} />
-          <MobileBrowsers borderBottom="1px solid #cdcdcd" childrenProps={{ borderRight: "1px solid #cdcdcd" }} />
-          {haveServerSupport && <ServerRuntimes borderBottom="1px solid #cdcdcd" childrenProps={{ borderRight: "1px solid #cdcdcd" }} />}
+          <DesktopBrowsers borderBottom={`1px solid ${colors.border}`} childrenProps={{ borderRight: `1px solid ${colors.border}` }} />
+          <MobileBrowsers borderBottom={`1px solid ${colors.border}`} childrenProps={{ borderRight: `1px solid ${colors.border}` }} />
+          {haveServerSupport && <ServerRuntimes borderBottom={`1px solid ${colors.border}`} childrenProps={{ borderRight: `1px solid ${colors.border}` }} />}
         </Flex>
       </Flex>
 
       <Flex>
-        <Flex width="100px" border="1px solid #cdcdcd" borderTop="none">
+        <Flex width="100px" border={`1px solid ${colors.border}`} borderTop="none">
           <Flex width="100px" alignItems="center" justifyContent="center" wordBreak="break-word" padding="0 2px">
             {name}
           </Flex>
         </Flex>
         <Flex width="100%">
-          <DesktopSupport support={support} borderBottom="1px solid #cdcdcd" childrenProps={{ borderRight: "1px solid #cdcdcd" }} />
-          <MobileSupport support={support} borderBottom="1px solid #cdcdcd" childrenProps={{ borderRight: "1px solid #cdcdcd" }} />
-          {haveServerSupport && <ServerSupport support={support} borderBottom="1px solid #cdcdcd" childrenProps={{ borderRight: "1px solid #cdcdcd" }} />}
+          <DesktopSupport support={support} borderBottom={`1px solid ${colors.border}`} childrenProps={{ borderRight: `1px solid ${colors.border}` }} />
+          <MobileSupport support={support} borderBottom={`1px solid ${colors.border}`} childrenProps={{ borderRight: `1px solid ${colors.border}` }} />
+          {haveServerSupport && <ServerSupport support={support} borderBottom={`1px solid ${colors.border}`} childrenProps={{ borderRight: `1px solid ${colors.border}` }} />}
         </Flex>
       </Flex>
     </Flex>
@@ -194,38 +201,39 @@ function RenderCompatSupportWide({ name, support }: { name: string; support: Com
 }
 
 function RenderCompatSupportCompact({ name, support }: { name: string; support: CompatStatement["support"] }) {
+  const colors = useThemeColors();
   const fullWidth = CELL_WIDTH * 6;
   const haveServerSupport = ["deno", "nodejs"].some((key) => key in support);
   const threeCols = (
     <Flex>
       <Flex flexDirection="column" width={`${CELL_WIDTH * 2}px`}>
-        <Flex height="20px" justifyContent="center" alignItems="center" border="1px solid #cdcdcd">
-          <Desktop style={{ color: "#696969" }} />
+        <Flex height="20px" justifyContent="center" alignItems="center" border={`1px solid ${colors.border}`}>
+          <Desktop style={{ color: colors.iconColor }} />
         </Flex>
         <Flex>
-          <DesktopBrowsers flexDirection="column" borderLeft="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" childrenProps={{ borderBottom: "1px solid #cdcdcd", height: "35px" }} />
-          <DesktopSupport support={support} flexDirection="column" borderRight="1px solid #cdcdcd" childrenProps={{ borderBottom: "1px solid #cdcdcd", height: "35px" }} />
+          <DesktopBrowsers flexDirection="column" borderLeft={`1px solid ${colors.border}`} borderRight={`1px solid ${colors.border}`} childrenProps={{ borderBottom: `1px solid ${colors.border}`, height: "35px" }} />
+          <DesktopSupport support={support} flexDirection="column" borderRight={`1px solid ${colors.border}`} childrenProps={{ borderBottom: `1px solid ${colors.border}`, height: "35px" }} />
         </Flex>
       </Flex>
 
       <Flex flexDirection="column" width={`${CELL_WIDTH * 2}px`}>
-        <Flex height="20px" justifyContent="center" alignItems="center" border="1px solid #cdcdcd">
-          <Mobile style={{ color: "#696969" }} />
+        <Flex height="20px" justifyContent="center" alignItems="center" border={`1px solid ${colors.border}`}>
+          <Mobile style={{ color: colors.iconColor }} />
         </Flex>
         <Flex>
-          <MobileBrowsers flexDirection="column" borderLeft="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" childrenProps={{ borderBottom: "1px solid #cdcdcd", height: "35px" }} />
-          <MobileSupport support={support} flexDirection="column" borderRight="1px solid #cdcdcd" childrenProps={{ borderBottom: "1px solid #cdcdcd", height: "35px" }} />
+          <MobileBrowsers flexDirection="column" borderLeft={`1px solid ${colors.border}`} borderRight={`1px solid ${colors.border}`} childrenProps={{ borderBottom: `1px solid ${colors.border}`, height: "35px" }} />
+          <MobileSupport support={support} flexDirection="column" borderRight={`1px solid ${colors.border}`} childrenProps={{ borderBottom: `1px solid ${colors.border}`, height: "35px" }} />
         </Flex>
       </Flex>
 
       {haveServerSupport && (
         <Flex flexDirection="column" width={`${CELL_WIDTH * 2}px`}>
-          <Flex height="20px" justifyContent="center" alignItems="center" border="1px solid #cdcdcd">
-            <Server style={{ color: "#696969" }} />
+          <Flex height="20px" justifyContent="center" alignItems="center" border={`1px solid ${colors.border}`}>
+            <Server style={{ color: colors.iconColor }} />
           </Flex>
           <Flex>
-            <ServerRuntimes flexDirection="column" borderLeft="1px solid #cdcdcd" borderRight="1px solid #cdcdcd" childrenProps={{ borderBottom: "1px solid #cdcdcd", height: "35px" }} />
-            <ServerSupport support={support} flexDirection="column" borderRight="1px solid #cdcdcd" childrenProps={{ borderBottom: "1px solid #cdcdcd", height: "35px" }} />
+            <ServerRuntimes flexDirection="column" borderLeft={`1px solid ${colors.border}`} borderRight={`1px solid ${colors.border}`} childrenProps={{ borderBottom: `1px solid ${colors.border}`, height: "35px" }} />
+            <ServerSupport support={support} flexDirection="column" borderRight={`1px solid ${colors.border}`} childrenProps={{ borderBottom: `1px solid ${colors.border}`, height: "35px" }} />
           </Flex>
         </Flex>
       )}
