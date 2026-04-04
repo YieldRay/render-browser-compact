@@ -1,0 +1,472 @@
+/* ─── Reset & base ─────────────────────────────────────────────────── */
+/* Global reset and font are in docs/index.html */
+
+/* ─── Top nav ──────────────────────────────────────────────────────── */
+.nav {
+  background: #1b1b1b;
+  color: #fff;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.2px;
+}
+.navLogoIcon {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 14px;
+  color: #83d9f2;
+  font-weight: 700;
+}
+.navLogoName { color: #fff; }
+
+.navSpacer { flex: 1; }
+
+.navCompact {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #ccc;
+  cursor: pointer;
+  user-select: none;
+}
+.navCompact input { accent-color: #83d9f2; }
+
+/* ─── Breadcrumb bar ───────────────────────────────────────────────── */
+.breadcrumb {
+  background: #f9f9fb;
+  border-bottom: 1px solid #dce3e5;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #767676;
+  flex-wrap: wrap;
+}
+.breadcrumbSep { opacity: 0.5; font-size: 11px; }
+.breadcrumbCurrent { color: #1b1b1b; font-weight: 500; }
+.breadcrumbLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  color: #0069c2;
+  cursor: pointer;
+  font-family: inherit;
+}
+.breadcrumbLink:hover { text-decoration: underline; color: #003d80; }
+
+/* ─── Layout shell ─────────────────────────────────────────────────── */
+.shell {
+  display: flex;
+  min-height: calc(100vh - 52px);
+}
+
+/* ─── Sidebar ──────────────────────────────────────────────────────── */
+.sidebar {
+  width: 248px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid #dce3e5;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+}
+
+.sidebarFilterWrap {
+  padding: 12px 12px 8px;
+}
+.sidebarFilterBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #dce3e5;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background: #fff;
+}
+.sidebarFilterIcon { color: #767676; font-size: 13px; }
+.sidebarFilterInput {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: inherit;
+  background: transparent;
+  color: #1b1b1b;
+  width: 100%;
+}
+
+.sidebarList { padding: 4px 0; }
+
+.sidebarItem {
+  display: block;
+  width: 100%;
+  padding: 6px 16px 6px 12px;
+  background: transparent;
+  color: #1b1b1b;
+  border: none;
+  border-left: 3px solid transparent;
+  text-align: left;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 1.4;
+}
+.sidebarItem:hover { background: #f3f4f6; }
+.sidebarItemActive,
+.sidebarSubItemActive {
+  background: #e8f0fc;
+  color: #0069c2;
+  border-left-color: #0069c2;
+  font-weight: 600;
+}
+
+.sidebarSubItem {
+  display: block;
+  width: 100%;
+  padding: 4px 16px 4px 32px;
+  background: transparent;
+  color: #595959;
+  border: none;
+  border-left: 3px solid transparent;
+  text-align: left;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 400;
+  cursor: pointer;
+}
+.sidebarSubItem:hover { background: #f3f4f6; }
+
+.sidebarParentLabel {
+  display: block;
+  width: 100%;
+  padding: 5px 16px 5px 28px;
+  background: transparent;
+  color: #595959;
+  border: none;
+  border-left: 3px solid transparent;
+  text-align: left;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 600;
+}
+.sidebarParentLabel:hover { background: #f3f4f6; }
+
+/* Mobile: sidebar hidden by default, toggled */
+.sidebarOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 150;
+}
+
+/* ─── Mobile menu button ───────────────────────────────────────────── */
+.menuBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+}
+
+/* ─── Main content ─────────────────────────────────────────────────── */
+.main {
+  flex: 1;
+  padding: 32px 24px 80px;
+  max-width: 860px;
+  min-width: 0;
+}
+
+.pageTitle {
+  font-size: 34px;
+  font-weight: 700;
+  color: #1b1b1b;
+  margin: 0 0 24px;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+/* ─── Browse page ──────────────────────────────────────────────────── */
+.browseDesc {
+  font-size: 15px;
+  color: #595959;
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.browseFilterWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #dce3e5;
+  border-radius: 4px;
+  padding: 7px 12px;
+  background: #fff;
+  max-width: 360px;
+  margin-bottom: 20px;
+}
+.browseFilterIcon { color: #767676; }
+.browseFilterInput {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  background: transparent;
+  color: #1b1b1b;
+  flex: 1;
+  min-width: 0;
+}
+.browseFilterClear {
+  background: none;
+  border: none;
+  color: #767676;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  line-height: 1;
+}
+
+.itemList {
+  border: 1px solid #dce3e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.itemEmpty { padding: 16px 14px; color: #767676; font-size: 14px; }
+
+.itemBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #dce3e5;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  gap: 8px;
+}
+.itemBtn:last-child { border-bottom: none; }
+.itemBtn:hover { background: #f3f4f6; }
+
+.itemKey {
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 13.5px;
+  color: #1b1b1b;
+}
+.itemKeyMuted { color: #595959; }
+.itemCount { font-size: 12px; color: #767676; flex-shrink: 0; }
+
+/* ─── Baseline box ─────────────────────────────────────────────────── */
+.baseline {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 4px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.baselineIcon { font-size: 20px; line-height: 1; margin-top: 1px; flex-shrink: 0; }
+.baselineTitle { font-size: 14px; font-weight: 600; color: #1b5e20; }
+.baselineSub { font-weight: 400; color: #595959; }
+.baselineDesc { font-size: 13px; color: #595959; margin-top: 3px; line-height: 1.5; }
+.baselineCode {
+  font-family: monospace;
+  background: rgba(0,0,0,0.06);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* ─── Compat table container ───────────────────────────────────────── */
+.compatWrap {
+  border: 1px solid #dce3e5;
+  border-radius: 4px;
+  padding: 20px;
+  background: #fff;
+  overflow-x: auto;
+  margin-bottom: 40px;
+}
+
+/* ─── Section heading ──────────────────────────────────────────────── */
+.sectionHeading {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1b1b1b;
+  margin: 0 0 20px;
+  padding-top: 24px;
+  border-top: 1px solid #dce3e5;
+}
+
+/* ─── Usage headings ───────────────────────────────────────────────── */
+.usageH3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1b1b1b;
+  margin: 0;
+  padding-top: 6px;
+}
+
+/* ─── Code block ───────────────────────────────────────────────────── */
+.codeBlock {
+  background: #f6f8fa;
+  color: #24292f;
+  padding: 16px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.65;
+  overflow-x: auto;
+  margin: 8px 0 28px;
+  border: 1px solid #dce3e5;
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  white-space: pre;
+}
+/* Reset any inherited styles on the inner <code> element */
+.codeBlock code {
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  padding: 0;
+  border: none;
+  white-space: inherit;
+  color: inherit;
+}
+
+/* ─── Syntax token colors — GitHub Light palette ───────────────────── */
+/* Matches MDN's own code block theme for seamless integration          */
+
+.codeBlock :global(.hljs-keyword),
+.codeBlock :global(.hljs-operator) {
+  color: #cf222e;
+}
+
+.codeBlock :global(.hljs-string),
+.codeBlock :global(.hljs-template-string),
+.codeBlock :global(.hljs-regexp) {
+  color: #0a3069;
+}
+
+.codeBlock :global(.hljs-comment),
+.codeBlock :global(.hljs-quote) {
+  color: #6e7781;
+  font-style: italic;
+}
+
+.codeBlock :global(.hljs-title),
+.codeBlock :global(.hljs-title\.function_),
+.codeBlock :global(.hljs-title\.class_) {
+  color: #8250df;
+}
+
+.codeBlock :global(.hljs-number),
+.codeBlock :global(.hljs-literal) {
+  color: #0550ae;
+}
+
+.codeBlock :global(.hljs-type),
+.codeBlock :global(.hljs-built_in) {
+  color: #953800;
+}
+
+.codeBlock :global(.hljs-attr),
+.codeBlock :global(.hljs-attribute) {
+  color: #0550ae;
+}
+
+.codeBlock :global(.hljs-tag) :global(.hljs-name) {
+  color: #116329;
+}
+
+.codeBlock :global(.hljs-variable),
+.codeBlock :global(.hljs-params) {
+  color: #24292f;
+}
+
+.codeBlock :global(.hljs-subst),
+.codeBlock :global(.hljs-template-variable) {
+  color: #24292f;
+}
+
+.codeBlock :global(.hljs-punctuation) {
+  color: #24292f;
+}
+
+/* ─── Landing page ─────────────────────────────────────────────────── */
+.landingDesc {
+  font-size: 15px;
+  color: #595959;
+  margin: 0;
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ─── Responsive: tablet ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 220px;
+  }
+  .main {
+    padding: 24px 16px 60px;
+  }
+}
+
+/* ─── Responsive: mobile ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Show hamburger, hide sidebar inline */
+  .menuBtn { display: block; }
+
+  .sidebar {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 52px);
+    z-index: 160;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+  }
+  .sidebarVisible {
+    transform: translateX(0);
+  }
+  .sidebarOverlay { display: none; }
+  .sidebarOverlayVisible { display: block; }
+
+  .shell { display: block; }
+
+  .main {
+    padding: 20px 16px 60px;
+    max-width: 100%;
+  }
+
+  .pageTitle { font-size: 26px; }
+
+  .browseFilterWrap { max-width: 100%; }
+}

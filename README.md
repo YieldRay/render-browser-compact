@@ -13,7 +13,7 @@ with a style similar to the MDN docs page.
 
 - [x] mobile view support
 - [ ] support showing sub compat data
-- [ ] add a docs site, and can select compat data by ui
+- [x] add a docs site, and can select compat data by ui
 - [x] auto width/height for svg
 - [x] support theming (dark mode)
 - [x] data fetching mode
