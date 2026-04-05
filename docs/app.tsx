@@ -17,9 +17,7 @@ hljs.registerLanguage("xml", xml);
 
 type TopKey = keyof Omit<CompatData, "__meta" | "browsers">;
 
-const TOP_KEYS = Object.keys(bcd).filter(
-  (k) => k !== "__meta" && k !== "browsers"
-) as TopKey[];
+const TOP_KEYS = Object.keys(bcd).filter((k) => k !== "__meta" && k !== "browsers") as TopKey[];
 
 function getNode(path: string[]): Identifier | null {
   if (!path.length) return null;
@@ -47,18 +45,12 @@ type State = { path: string[]; compact: boolean };
 
 // ─── Top nav ─────────────────────────────────────────────────────────────────
 
-function TopNav({
-  compact,
-  onToggleCompact,
-  onMenuClick,
-}: {
-  compact: boolean;
-  onToggleCompact: () => void;
-  onMenuClick: () => void;
-}) {
+function TopNav({ compact, onToggleCompact, onMenuClick }: { compact: boolean; onToggleCompact: () => void; onMenuClick: () => void }) {
   return (
     <nav className={s.nav}>
-      <button className={s.menuBtn} onClick={onMenuClick} aria-label="Toggle menu">☰</button>
+      <button className={s.menuBtn} onClick={onMenuClick} aria-label="Toggle menu">
+        ☰
+      </button>
       <a className={s.navLogo} href="#">
         <span className={s.navLogoIcon}>&lt;/&gt;</span>
         <span className={s.navLogoName}>render-browser-compat</span>
@@ -85,10 +77,13 @@ function BreadcrumbBar({ path, onNav }: { path: string[]; onNav: (p: string[]) =
         return (
           <React.Fragment key={i}>
             {i > 0 && <span className={s.breadcrumbSep}>›</span>}
-            {isLast
-              ? <span className={s.breadcrumbCurrent}>{seg}</span>
-              : <button className={s.breadcrumbLink} onClick={() => onNav(navPath)}>{seg}</button>
-            }
+            {isLast ? (
+              <span className={s.breadcrumbCurrent}>{seg}</span>
+            ) : (
+              <button className={s.breadcrumbLink} onClick={() => onNav(navPath)}>
+                {seg}
+              </button>
+            )}
           </React.Fragment>
         );
       })}
@@ -98,34 +93,13 @@ function BreadcrumbBar({ path, onNav }: { path: string[]; onNav: (p: string[]) =
 
 // ─── Sidebar ─────────────────────────────────────────────────────────────────
 
-function Sidebar({
-  path,
-  onNav,
-  visible,
-  onClose,
-}: {
-  path: string[];
-  onNav: (p: string[]) => void;
-  visible: boolean;
-  onClose: () => void;
-}) {
+function Sidebar({ path, onNav, visible, onClose }: { path: string[]; onNav: (p: string[]) => void; visible: boolean; onClose: () => void }) {
   const [filter, setFilter] = React.useState("");
   const topActive = path[0] ?? "";
-  const parentPath = React.useMemo(
-    () => (path.length > 1 ? path.slice(0, -1) : []),
-    [path]
-  );
-  const parentNode = React.useMemo(
-    () => (parentPath.length ? getNode(parentPath) : null),
-    [parentPath]
-  );
-  const siblings = React.useMemo(
-    () => (parentNode ? childKeys(parentNode).filter((k) => k !== topActive) : null),
-    [parentNode, topActive]
-  );
-  const filteredTop = filter
-    ? TOP_KEYS.filter((k) => k.toLowerCase().includes(filter.toLowerCase()))
-    : TOP_KEYS;
+  const parentPath = React.useMemo(() => (path.length > 1 ? path.slice(0, -1) : []), [path]);
+  const parentNode = React.useMemo(() => (parentPath.length ? getNode(parentPath) : null), [parentPath]);
+  const siblings = React.useMemo(() => (parentNode ? childKeys(parentNode).filter((k) => k !== topActive) : null), [parentNode, topActive]);
+  const filteredTop = filter ? TOP_KEYS.filter((k) => k.toLowerCase().includes(filter.toLowerCase())) : TOP_KEYS;
 
   function nav(p: string[]) {
     setFilter("");
@@ -136,21 +110,12 @@ function Sidebar({
   return (
     <>
       {/* Overlay for mobile */}
-      <div
-        className={`${s.sidebarOverlay} ${visible ? s.sidebarOverlayVisible : ""}`}
-        onClick={onClose}
-      />
+      <div className={`${s.sidebarOverlay} ${visible ? s.sidebarOverlayVisible : ""}`} onClick={onClose} />
       <aside className={`${s.sidebar} ${visible ? s.sidebarVisible : ""}`}>
         <div className={s.sidebarFilterWrap}>
           <div className={s.sidebarFilterBox}>
             <span className={s.sidebarFilterIcon}>⌕</span>
-            <input
-              className={s.sidebarFilterInput}
-              type="text"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              placeholder="Filter"
-            />
+            <input className={s.sidebarFilterInput} type="text" value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Filter" />
           </div>
         </div>
 
@@ -159,34 +124,22 @@ function Sidebar({
             const isActive = cat === topActive;
             return (
               <React.Fragment key={cat}>
-                <button
-                  className={`${s.sidebarItem} ${isActive ? s.sidebarItemActive : ""}`}
-                  onClick={() => nav([cat])}
-                >
+                <button className={`${s.sidebarItem} ${isActive ? s.sidebarItemActive : ""}`} onClick={() => nav([cat])}>
                   {cat}
                 </button>
 
                 {isActive && siblings && !filter && (
                   <div>
                     {parentPath.length > 1 && (
-                      <button
-                        className={s.sidebarParentLabel}
-                        onClick={() => nav(parentPath)}
-                      >
+                      <button className={s.sidebarParentLabel} onClick={() => nav(parentPath)}>
                         {parentPath[parentPath.length - 1]}
                       </button>
                     )}
                     {siblings.map((sib) => {
                       const sibPath = [...parentPath, sib];
-                      const isSibActive =
-                        path[path.length - 1] === sib &&
-                        path.length === sibPath.length;
+                      const isSibActive = path[path.length - 1] === sib && path.length === sibPath.length;
                       return (
-                        <button
-                          key={sib}
-                          className={`${s.sidebarSubItem} ${isSibActive ? s.sidebarSubItemActive : ""}`}
-                          onClick={() => nav(sibPath)}
-                        >
+                        <button key={sib} className={`${s.sidebarSubItem} ${isSibActive ? s.sidebarSubItemActive : ""}`} onClick={() => nav(sibPath)}>
                           {sib}
                         </button>
                       );
@@ -213,9 +166,7 @@ function BaselineBox({ name }: { name: string }) {
           Baseline <span className={s.baselineSub}>· Widely available</span>
         </div>
         <div className={s.baselineDesc}>
-          This feature is well established and works across many browsers.
-          Showing compatibility data for{" "}
-          <code className={s.baselineCode}>{name}</code>.
+          This feature is well established and works across many browsers. Showing compatibility data for <code className={s.baselineCode}>{name}</code>.
         </div>
       </div>
     </div>
@@ -224,40 +175,20 @@ function BaselineBox({ name }: { name: string }) {
 
 // ─── Browse page ──────────────────────────────────────────────────────────────
 
-function BrowsePage({
-  path,
-  node,
-  compact,
-  onNav,
-}: {
-  path: string[];
-  node: Identifier;
-  compact: boolean;
-  onNav: (p: string[]) => void;
-}) {
+function BrowsePage({ path, node, compact, onNav }: { path: string[]; node: Identifier; compact: boolean; onNav: (p: string[]) => void }) {
   const [filter, setFilter] = React.useState("");
   const keys = childKeys(node);
-  const filtered = filter
-    ? keys.filter((k) => k.toLowerCase().includes(filter.toLowerCase()))
-    : keys;
+  const filtered = filter ? keys.filter((k) => k.toLowerCase().includes(filter.toLowerCase())) : keys;
 
   return (
     <div>
       <p className={s.browseDesc}>
-        Browse {keys.length} item{keys.length !== 1 ? "s" : ""} in{" "}
-        <strong>{path[path.length - 1]}</strong>. Click any item to view
-        browser compatibility data.
+        Browse {keys.length} item{keys.length !== 1 ? "s" : ""} in <strong>{path[path.length - 1]}</strong>. Click any item to view browser compatibility data.
       </p>
 
       <div className={s.browseFilterWrap}>
         <span className={s.browseFilterIcon}>⌕</span>
-        <input
-          className={s.browseFilterInput}
-          type="text"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          placeholder={`Filter ${path[path.length - 1]}…`}
-        />
+        <input className={s.browseFilterInput} type="text" value={filter} onChange={(e) => setFilter(e.target.value)} placeholder={`Filter ${path[path.length - 1]}…`} />
         {filter && (
           <button className={s.browseFilterClear} onClick={() => setFilter("")}>
             ✕
@@ -273,19 +204,9 @@ function BrowsePage({
             const child = node[key] as Identifier;
             const kids = childKeys(child);
             return (
-              <button
-                key={key}
-                className={s.itemBtn}
-                onClick={() => onNav([...path, key])}
-              >
-                <span
-                  className={`${s.itemKey} ${!hasCompat(child) ? s.itemKeyMuted : ""}`}
-                >
-                  {key}
-                </span>
-                <span className={s.itemCount}>
-                  {kids.length > 0 ? `${kids.length} ›` : ""}
-                </span>
+              <button key={key} className={s.itemBtn} onClick={() => onNav([...path, key])}>
+                <span className={`${s.itemKey} ${!hasCompat(child) ? s.itemKeyMuted : ""}`}>{key}</span>
+                <span className={s.itemCount}>{kids.length > 0 ? `${kids.length} ›` : ""}</span>
               </button>
             );
           })
@@ -296,11 +217,7 @@ function BrowsePage({
         <div style={{ marginTop: 40 }}>
           <h2 className={s.sectionHeading}>Browser compatibility</h2>
           <div className={s.compatWrap}>
-            <RenderBrowserCompat
-              paths={path as unknown as Paths}
-              compact={compact}
-              theme={lightTheme}
-            />
+            <RenderBrowserCompat paths={path as unknown as Paths} compact={compact} theme={lightTheme} />
           </div>
         </div>
       )}
@@ -311,10 +228,7 @@ function BrowsePage({
 // ─── Code block with syntax highlighting ─────────────────────────────────────
 
 function CodeBlock({ code, lang = "typescript" }: { code: string; lang?: string }) {
-  const highlighted = React.useMemo(
-    () => hljs.highlight(code, { language: lang }).value,
-    [code, lang]
-  );
+  const highlighted = React.useMemo(() => hljs.highlight(code, { language: lang }).value, [code, lang]);
   return (
     <pre className={s.codeBlock}>
       <code dangerouslySetInnerHTML={{ __html: highlighted }} />
@@ -364,11 +278,7 @@ function DetailPage({ path, compact }: { path: string[]; compact: boolean }) {
       <BaselineBox name={name} />
 
       <div className={s.compatWrap}>
-        <RenderBrowserCompat
-          paths={path as unknown as Paths}
-          compact={compact}
-          theme={lightTheme}
-        />
+        <RenderBrowserCompat paths={path as unknown as Paths} compact={compact} theme={lightTheme} />
       </div>
 
       <h2 className={s.sectionHeading}>Usage</h2>
@@ -392,11 +302,7 @@ function Content({ state, onNav }: { state: State; onNav: (p: string[]) => void 
     return (
       <main className={s.main}>
         <h1 className={s.pageTitle}>Browser Compatibility Data</h1>
-        <p className={s.landingDesc}>
-          Select a category from the sidebar to browse MDN browser compatibility
-          data. Each entry shows which browsers and runtimes support a given web
-          feature.
-        </p>
+        <p className={s.landingDesc}>Select a category from the sidebar to browse MDN browser compatibility data. Each entry shows which browsers and runtimes support a given web feature.</p>
       </main>
     );
   }
@@ -405,7 +311,9 @@ function Content({ state, onNav }: { state: State; onNav: (p: string[]) => void 
   if (!node) {
     return (
       <main className={s.main}>
-        <p>Not found: <code>{path.join(".")}</code></p>
+        <p>
+          Not found: <code>{path.join(".")}</code>
+        </p>
       </main>
     );
   }
@@ -416,10 +324,7 @@ function Content({ state, onNav }: { state: State; onNav: (p: string[]) => void 
   return (
     <main className={s.main}>
       <h1 className={s.pageTitle}>{name}</h1>
-      {isLeaf
-        ? <DetailPage path={path} compact={compact} />
-        : <BrowsePage path={path} node={node} compact={compact} onNav={onNav} />
-      }
+      {isLeaf ? <DetailPage path={path} compact={compact} /> : <BrowsePage path={path} node={node} compact={compact} onNav={onNav} />}
     </main>
   );
 }
@@ -437,9 +342,7 @@ function pathToHash(path: string[]): string {
 }
 
 function useHashRouter(): [string[], (path: string[]) => void] {
-  const [path, setPath] = React.useState<string[]>(() =>
-    hashToPath(window.location.hash)
-  );
+  const [path, setPath] = React.useState<string[]>(() => hashToPath(window.location.hash));
 
   // Sync hash → state (back/forward navigation)
   React.useEffect(() => {
@@ -474,19 +377,10 @@ function App() {
 
   return (
     <>
-      <TopNav
-        compact={compact}
-        onToggleCompact={() => setCompact((v) => !v)}
-        onMenuClick={() => setMenuOpen((v) => !v)}
-      />
+      <TopNav compact={compact} onToggleCompact={() => setCompact((v) => !v)} onMenuClick={() => setMenuOpen((v) => !v)} />
       <BreadcrumbBar path={path} onNav={nav} />
       <div className={s.shell}>
-        <Sidebar
-          path={path}
-          onNav={nav}
-          visible={menuOpen}
-          onClose={() => setMenuOpen(false)}
-        />
+        <Sidebar path={path} onNav={nav} visible={menuOpen} onClose={() => setMenuOpen(false)} />
         <Content state={state} onNav={nav} />
       </div>
     </>
@@ -496,5 +390,5 @@ function App() {
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -15,7 +15,7 @@ export interface Theme {
 
 export const lightTheme: Theme = {
   iconColor: "#696969",
-  supportYesColor: "#007936", 
+  supportYesColor: "#007936",
   supportNoColor: "#d30038",
   textColor: "#1b1b1b",
   borderColor: "#cdcdcd",
@@ -25,7 +25,7 @@ export const lightTheme: Theme = {
 export const darkTheme: Theme = {
   iconColor: "#a0a0a0",
   supportYesColor: "#4ade80",
-  supportNoColor: "#f87171", 
+  supportNoColor: "#f87171",
   textColor: "#e5e5e5",
   borderColor: "#404040",
   backgroundColor: "#1f1f1f",

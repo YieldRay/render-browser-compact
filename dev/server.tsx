@@ -6,7 +6,7 @@ const handler = async (request: Request) => {
   const paths = ["api", "structuredClone"] as const;
   const theme = url.searchParams.get("theme") === "dark" ? darkTheme : lightTheme;
   const compact = url.searchParams.has("compact");
-  
+
   const svg = await renderSVG(paths, compact, theme);
   return new Response(svg, { headers: { "content-type": "image/svg+xml" } });
 };

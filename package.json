@@ -1,6 +1,6 @@
 {
   "name": "render-browser-compat",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "mprocs",
@@ -16,13 +16,35 @@
   "main": "./dist/isomorphic.js",
   "types": "./dist/isomorphic.d.ts",
   "exports": {
-    "/isomorphic": "./dist/isomorphic.js",
-    "/react-dom": "./dist/react-dom.js",
-    "/web-component": "./dist/web-component.js",
-    "/svg": "./dist/svg.js",
-    "/html": "./dist/html.js",
-    "/theme": "./dist/theme.js",
-    "/": "./dist/"
+    ".": {
+      "types": "./dist/isomorphic.d.ts",
+      "import": "./dist/isomorphic.js"
+    },
+    "./isomorphic": {
+      "types": "./dist/isomorphic.d.ts",
+      "import": "./dist/isomorphic.js"
+    },
+    "./react-dom": {
+      "types": "./dist/react-dom.d.ts",
+      "import": "./dist/react-dom.js"
+    },
+    "./web-component": {
+      "types": "./dist/web-component.d.ts",
+      "import": "./dist/web-component.js"
+    },
+    "./svg": {
+      "types": "./dist/svg.d.ts",
+      "import": "./dist/svg.js"
+    },
+    "./html": {
+      "types": "./dist/html.d.ts",
+      "import": "./dist/html.js"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js"
+    },
+    "./package.json": "./package.json"
   },
   "peerDependencies": {
     "@mdn/browser-compat-data": "^7",
