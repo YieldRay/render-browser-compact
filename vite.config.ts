@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 
 // https://cn.vite.dev/guide/build#library-mode
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), dts({ tsconfigPath: "./tsconfig.app.json" })],
+  plugins: [react(), tsconfigPaths(), dts({ tsconfigPath: "./tsconfig.app.json", entryRoot: resolve(__dirname, "src") })],
   build: {
     lib: {
       entry: {
